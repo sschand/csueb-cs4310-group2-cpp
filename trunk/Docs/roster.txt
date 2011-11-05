@@ -1,7 +1,6 @@
 NAME                               Preferred Meeting Times
 -----------------------------------------------------------------------
 Chand, Sharol S.                   MW Before Class or T/TH before 4pm
-Donat, Brian L.                    MW Before Class
 Henninger, Joshua M.		   MW Before Class, T/Th between 12pm and 2pm
 Holland,Richard C.		   MW Before Class (possible need to know in advance)/ after class as well, T/Th between 12-6
 Medina, Martha Paola		   MW Before/After class, T/Th before 2pm after 6pm.	
