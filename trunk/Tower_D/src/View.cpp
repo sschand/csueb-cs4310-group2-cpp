@@ -20,14 +20,17 @@ View::View(QWidget *parent) :
     start_quit->move(628, 516);
     start_quit->resize(141, 55);
 
-    monsterImage = new QPixmap("resources/monster.png");
+    monsterImage = new QPixmap("resources/greenMonster.png");//monster.pngdemon.pngblueMonster.png
     *monsterImage = monsterImage->scaled(34,34);
 
-    towerImage = new QPixmap("resources/tower.png");
+    towerImage = new QPixmap("resources/tower.png");//rook.png
     *towerImage = towerImage->scaled(34,34);
 
     QPixmap *back = new QPixmap("resources/TowerDBase.png");//PositionTestBase.png
     *back = back->scaledToWidth(801);
+
+
+
 
                     scene->addWidget(gameGrid);
                     scene->addWidget(towerGrid);
@@ -36,15 +39,19 @@ View::View(QWidget *parent) :
     score         = scene->addText(QString::number(0), QFont("Times", 14, 2));
     money         = scene->addText(QString::number(0), QFont("Times", 14, 2));
     health        = scene->addText(QString::number(0), QFont("Times", 14, 2));
-    messageBoard  = scene->addText("Purchase towers or\nPress Start to send enemies!", QFont("Times", 16, 2));
+    messageBoard  = scene->addText("This is the message board!", QFont("Times", 16, 2));
                     scene->addWidget(start_quit);
 
+    QGraphicsTextItem* item = scene->addText("$100", QFont("Times", 12, 10));
+
+    item->moveBy(136, 475);
+    item->setDefaultTextColor(QColor(0,255,0));
     selection1->moveBy(140,444);
     selection1->scale(1.1176,1.1176);
     score->moveBy(715, 250);
     money->moveBy(715, 315);
     health->moveBy(715, 380);
-    messageBoard->moveBy(120, 520);
+    messageBoard->moveBy(120, 530);
 
     window->setScene(scene);
     window->resize(803, 590);
@@ -95,8 +102,7 @@ void View::addTower(int x, int y, int grdNmbr)
 
     temp->towerItem->moveBy(x, y);
     towers.push_back(temp);
-
-    loaded = false;
+    //loaded = false;
 }
 
 bool View::isLoaded()
@@ -163,6 +169,8 @@ void View::incrementMonsters(int *pth, int pthSz)
             scene->removeItem(monsters[index]->monsterItem);
             monsters.remove(index);
             monsters.squeeze();
+            //printMsg("Castle hit!");
+            //QTimer::singleShot(500, this, SLOT(clearMessage()));
         }
     }
     printMonsters();
@@ -170,11 +178,68 @@ void View::incrementMonsters(int *pth, int pthSz)
 
 void View::kill(QVector<int> deadMonsters)
 {
+
     for (int index = 0; index < deadMonsters.size(); index++)
     {
         monsters[deadMonsters[index]]->monsterItem->hide();
         scene->removeItem(monsters[deadMonsters[index]]->monsterItem);
         monsters.remove(deadMonsters[index]);
         monsters.squeeze();
+        //printMsg("Monster killed!");
+        //QTimer::singleShot(500, this, SLOT(clearMessage()));
+    }
+}
+
+void View::clearMessage()
+{
+    messageBoard->setPlainText("");
+}
+
+void View::printMsg(QString msg)
+{
+    messageBoard->setPlainText(msg);
+    window->setScene(scene);
+}
+
+void View::drawAroundPath(int *pth, int pthSz)
+{
+    QPixmap *path = new QPixmap("resources/softPath.png");//redTile.pngbrownPath.pngladyPath.pngpuzzlePath.pngmarble.png
+    *path = path->scaled(34, 34);
+
+    //QPixmap *back = new QPixmap("resources/dirt.png");//grass.pngblackMarble.png
+    //*back = back->scaled(578,408);
+
+    QGraphicsPixmapItem *p;//,
+                        //*g = scene->addPixmap(*back);
+    //g->moveBy(22,10);
+
+    bool found;
+    int x, y;
+    for (int grdNmbr = 1; grdNmbr < 205; grdNmbr++)
+    {
+        found = false;
+        if (grdNmbr%17 == 0)
+        {
+            x = 566;
+        }
+        else
+        {
+            x = (((grdNmbr%17)-1)*34)+22;
+        }
+        y = (((grdNmbr-1)/17)*34)+ 10;
+
+        for (int pathIndex = 0; pathIndex < pthSz; pathIndex++)
+        {
+            if (grdNmbr == pth[pathIndex])
+            {
+                found = true;
+                break;
+            }
+        }
+        if (found)
+        {
+            p = scene->addPixmap(*path);
+            p->moveBy(x,y);
+        }
     }
 }

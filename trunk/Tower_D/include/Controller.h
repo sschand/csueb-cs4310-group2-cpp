@@ -14,6 +14,8 @@ private:
     Model * model;
     View * view;
 
+    int timeInterval;
+    QTimer *waveTimer;
     QTimer *createMonster;
     QTimer *gameTimer;
 
@@ -31,6 +33,9 @@ public slots:
     void addTower();
     void incrementMonsters();
     void connectQuit();
+    void stopClocks();
+    void nextLevel();
+    void endGame(bool win);
 
 };
 

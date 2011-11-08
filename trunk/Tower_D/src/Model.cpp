@@ -3,6 +3,7 @@
 Model::Model(QWidget *parent) :
     QWidget(parent)
 {
+    level = 0;
     pathSize = 58;
     gameTitle = "Tower Defense 1.1";
     castle = new Castle;
@@ -72,7 +73,7 @@ Model::Model(QWidget *parent) :
 
 void Model::addMonster()
 {
-    monsters.push_back(new Monster);
+    monsters.push_back(new Monster(level));
 }
 
 bool Model::addTower(int grdNmbr)
@@ -146,6 +147,7 @@ void Model::kill(int twrIndex, int mnstIndex)
         deadMonsters.push_back(mnstIndex);
         monsters.remove(mnstIndex);
         monsters.squeeze();
+        castle->spendMoney(-50);
     }
 }
 
@@ -153,10 +155,11 @@ QVector<int> Model::towersTakeShot()
 {
     deadMonsters.clear();
     int twrGN, mnstGN;
+    bool temp;
 
     for (int twrIndex = 0; twrIndex < towers.size(); twrIndex++)
     {
-        towers[twrIndex]->setSight(false);
+        temp = false;
         twrGN = towers[twrIndex]->getGridNumber();
         for (int mnstIndex = 0; mnstIndex < monsters.size(); mnstIndex++)
         {
@@ -165,10 +168,11 @@ QVector<int> Model::towersTakeShot()
                 mnstGN == twrGN+1 ||mnstGN == twrGN+16 ||mnstGN == twrGN+17 ||mnstGN == twrGN+18)
             {
                 mnstGN = mnstIndex;
-                towers[twrIndex]->setSight(true);
+                temp = true;
                 break;
             }
         }
+        towers[twrIndex]->setSight(temp);
 
         if (towers[twrIndex]->enemyIsInSight())
         {
@@ -188,4 +192,19 @@ QVector<int> Model::towersTakeShot()
         }
     }
     return deadMonsters;
+}
+
+int Model::getLevel()
+{
+    return level;
+}
+
+void Model::nextLevel()
+{
+    level++;
+}
+
+int Model::getMonsterSize()
+{
+    return monsters.size();
 }
