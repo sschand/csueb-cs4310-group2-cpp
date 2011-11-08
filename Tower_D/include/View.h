@@ -8,6 +8,7 @@
 #include <QGraphicsProxyWidget>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QTimer>
 #include <QVector>
 
 class View : public QWidget
@@ -36,7 +37,7 @@ private:
     QPushButton *start_quit;
     QGraphicsPixmapItem *background, *selection1;
     QGraphicsScene *scene;
-    QGraphicsTextItem *score, *money, *health;
+    QGraphicsTextItem *score, *money, *health, *messageBoard;
     QGraphicsView *window;
 
 public:
@@ -46,7 +47,6 @@ public:
     ClickableArea * getTowerGrid();
     QPushButton * getStart_Quit();
     QGraphicsView * getWindow();
-    QGraphicsTextItem *messageBoard;
 
     void addMonster();
     void addTower(int x, int y, int grdNmbr);
@@ -55,9 +55,12 @@ public:
     void printMonsters();
     void incrementMonsters(int *pth, int pthSz);
     void kill(QVector<int>);
+    void printMsg(QString);
+    void drawAroundPath(int *pth, int pthSz);
 
 public slots:
     void loadTower(int twrChc);
+    void clearMessage();
 
 };
 

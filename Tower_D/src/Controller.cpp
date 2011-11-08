@@ -7,6 +7,7 @@ Controller::Controller(QWidget *parent) :
 
 void Controller::addViewModel(View *v, Model *m)
 {
+    timeInterval = 200;
     view = v;
 
     QObject::connect(view->getStart_Quit(), SIGNAL(clicked()), this, SLOT(connectQuit()));
@@ -19,6 +20,27 @@ void Controller::addViewModel(View *v, Model *m)
 
     QObject::connect(view->getTowerGrid(), SIGNAL(clicked()), this, SLOT(towerChoice()));
     QObject::connect(this, SIGNAL(validTower(int)), view, SLOT(loadTower(int)));
+
+    waveTimer = new QTimer;
+    waveTimer->setInterval(timeInterval*2);
+
+    //the createMonster interval value must be less than
+    //the gameTimer interval value
+    createMonster = new QTimer;
+    createMonster->setInterval(timeInterval);
+
+    gameTimer = new QTimer;
+    gameTimer->setInterval(58*timeInterval);
+
+    QObject::connect(waveTimer, SIGNAL(timeout()), this, SLOT(stopClocks()));
+
+    QObject::connect(createMonster, SIGNAL(timeout()), this, SLOT(addMonster()));
+    QObject::connect(createMonster, SIGNAL(timeout()), this, SLOT(incrementMonsters()));
+
+    QObject::connect(gameTimer, SIGNAL(timeout()), this, SLOT(nextLevel()));
+
+    view->drawAroundPath(model->getPath(), model->getPathSize());
+
 }
 
 void Controller::addTower()
@@ -66,25 +88,22 @@ void Controller::addMonster()
 
 void Controller::incrementMonsters()
 {
-
     view->incrementMonsters(model->getPath(), model->getPathSize());
     model->incrementMonsters();
 
-    view->updateStats(model->getCastle()->getHealth(),model->getCastle()->getMoney(),model->getCastle()->getScore());
-    if (model->getCastle()->getHealth() == 0)
+    if (model->getCastle()->getHealth() < 1)
     {
-        gameTimer->stop();
         createMonster->stop();
-
-        QObject::disconnect(view->getGameGrid(), SIGNAL(clicked()), this, SLOT(addTower()));
-
-        QObject::disconnect(view->getTowerGrid(), SIGNAL(clicked()), this, SLOT(towerChoice()));
-        QObject::disconnect(this, SIGNAL(validTower(int)), view, SLOT(loadTower(int)));
+        gameTimer->stop();
+        waveTimer->stop();
+        endGame(false);
     }
     else
     {
         view->kill(model->towersTakeShot());
     }
+
+    view->updateStats(model->getCastle()->getHealth(),model->getCastle()->getMoney(),model->getCastle()->getScore());
 }
 
 void Controller::connectQuit()
@@ -92,21 +111,68 @@ void Controller::connectQuit()
     QObject::disconnect(view->getStart_Quit(), SIGNAL(clicked()), this, SLOT(connectQuit()));
     QObject::connect(view->getStart_Quit(), SIGNAL(clicked()), view->getWindow(), SLOT(close()));
     view->getStart_Quit()->setText("Quit");
-    view->messageBoard->setPlainText("Press Quit to exit game");
 
-    createMonster = new QTimer;
-    createMonster->setInterval(1000);
+    model->nextLevel();
+
+    waveTimer->start();
     createMonster->start();
 
-    QObject::connect(createMonster, SIGNAL(timeout()), this, SLOT(addMonster()));
+    view->clearMessage();
+}
 
-    gameTimer = new QTimer;
-    gameTimer->setInterval(100);
+void Controller::stopClocks()
+{
+    QObject::disconnect(createMonster, SIGNAL(timeout()), this, SLOT(addMonster()));
+
+    waveTimer->stop();
+    gameTimer->setInterval(waveTimer->interval()+(58*timeInterval));
     gameTimer->start();
+}
 
-    QObject::connect(gameTimer, SIGNAL(timeout()), this, SLOT(incrementMonsters()));
+void Controller::nextLevel()
+{
+    model->nextLevel();
 
-    view->addMonster();
-    model->addMonster();
+    if (model->getLevel() < 16)
+    {
+        QObject::connect(createMonster, SIGNAL(timeout()), this, SLOT(addMonster()));
 
+        gameTimer->stop();
+        waveTimer->setInterval(model->getLevel()*timeInterval*2);
+        waveTimer->start();
+    }
+    else if (model->getLevel() == 16)
+    {
+        model->getCastle()->subtractHealth(model->getCastle()->getHealth()-1);
+        addMonster();
+    }
+    else
+    {
+        gameTimer->stop();
+        endGame(true);
+    }
+}
+
+void Controller::endGame(bool win)
+{
+    if (win)
+    {
+        QObject::disconnect(waveTimer, SIGNAL(timeout()), this, SLOT(stopClocks()));
+        QObject::disconnect(createMonster, SIGNAL(timeout()), this, SLOT(incrementMonsters()));
+        QObject::disconnect(view->getGameGrid(), SIGNAL(clicked()), this, SLOT(addTower()));
+        QObject::disconnect(view->getTowerGrid(), SIGNAL(clicked()), this, SLOT(towerChoice()));
+        QObject::disconnect(this, SIGNAL(validTower(int)), view, SLOT(loadTower(int)));
+        QObject::disconnect(gameTimer, SIGNAL(timeout()), this, SLOT(nextLevel()));
+        view->printMsg("You win!");
+    }
+    else
+    {
+        QObject::disconnect(createMonster, SIGNAL(timeout()), this, SLOT(addMonster()));
+        QObject::disconnect(waveTimer, SIGNAL(timeout()), this, SLOT(stopClocks()));
+        QObject::disconnect(createMonster, SIGNAL(timeout()), this, SLOT(incrementMonsters()));
+        QObject::disconnect(view->getGameGrid(), SIGNAL(clicked()), this, SLOT(addTower()));
+        QObject::disconnect(view->getTowerGrid(), SIGNAL(clicked()), this, SLOT(towerChoice()));
+        QObject::disconnect(this, SIGNAL(validTower(int)), view, SLOT(loadTower(int)));
+        view->printMsg("You lose!");
+    }
 }

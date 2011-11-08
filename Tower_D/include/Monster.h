@@ -10,6 +10,7 @@ private:
 
 public:
     Monster();
+    Monster(int dmg);
     int getGridNumber();
     void setGridNumber(int grdNmbr);
     int getDamage();

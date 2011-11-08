@@ -14,6 +14,7 @@ class Model : public QWidget
 private:
     Castle *castle;
 
+    int level;
     int *path;
     int pathSize;
     char *gameTitle;
@@ -32,6 +33,9 @@ public:
     void incrementMonsters();
     void kill(int twrIndex, int mnstIndex);
     QVector<int> towersTakeShot();
+    int getLevel();
+    void nextLevel();
+    int getMonsterSize();
 
     Castle * getCastle();
 
