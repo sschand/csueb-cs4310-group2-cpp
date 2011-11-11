@@ -29,8 +29,12 @@ class Tower1 : public GraphicsItem //tower class declaration inherits from graph
 	public:
 		Tower1() //constructor
 		{
-                        setTower1(10,10,3,0);//remember to change the grid number and attributes using the default constructor to give each tower
+                        //setTower1(10,10,3,0);//remember to change the grid number and attributes using the default constructor to give each tower
                                              //a diferent grid number
+
+                    damage = 10;
+                    shotCounter = 3;
+                    enemyInSight = false;
                 }
 
                 Tower1(int fp, int cv, int ss, int gn) //this constructor will be used once we figure out what tower tha gamer will buy or purchase.
