@@ -27,6 +27,7 @@ Model::Model(QWidget *parent) : QWidget(parent)
 
     castle = new Castle;
     mns_path = new ArrayPath;
+    setTowerTypes();
 
 
     /*int x = 0;

@@ -6,6 +6,7 @@
 #include "include/Tower1.h"
 #include "include/GraphicsItem.h"
 #include "include/ArrayPath.h"
+#include "include/TowerArray.h"
 #include <QVector>
 #include <QWidget>
 
@@ -32,8 +33,18 @@ class Model : QWidget //inherited from QWidget
             char * gameTitle;
             int level;
             QVector<int> deadMonsters;
+            Tower1 type1;
+            Tower1 type2;
+            Tower1 type3;
+            ArrayTowers * atwr;
+            void setTowerTypes()
+            {
+                atwr = new ArrayTowers(type1, type2, type3);
 
-	public:
+            }
+
+
+        public:
                 explicit Model( QWidget * parent = 0 ); //Constructor
 
                 bool addTower(int);//we are going to match up the grid number being clicked,
@@ -49,6 +60,7 @@ class Model : QWidget //inherited from QWidget
                 int getLevel();
                 void nextLevel();
                 int getMonsterSize();
+
 
 };
 #endif
