@@ -2,12 +2,11 @@
 = TowerD Defense Game =
 Developers:
 Sharol Chand
-Adam Vierra
 Joshua Henninger
+Richard Holland
 Paola Medina 
-Richard 
 Emilio E. Venegas
-Sharol Chand
+Adam Vierra
 
 = Introduction =
 
