@@ -18,7 +18,6 @@ This is a tower defense game. The object of the game is to prevent monsters to r
 
 
 = Set up Instructions =
-= Set up Instructions =
 
 Requirements:
              * Must have Qt installed on your machine.
