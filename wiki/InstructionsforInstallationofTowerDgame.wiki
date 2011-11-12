@@ -23,6 +23,7 @@ Requirements:
              * Must have Qt installed on your machine.
 
 Install step:
+
 1. Download the folder labeld "TowerD.zip" to your desktop or folder of your choice from the downloads section.
 
 2. Extract the files from the folder. (Usually done by right clicking on the zipped folder and clicking on "Extract all". Then just follow the prompts on your screen.)
@@ -47,5 +48,4 @@ How to play the Tower Defense game:
             
 3. The towers automatically kill monsters if the monsters are in the tower's range. For every monster hit, you earn 10 points and 10 coins. If the monster makes it way all the end of the path, it has reached the castle, therefore the health of the castle will be decremented. For each monster that reaches the castle, the health is decremented by 1 point. 
 
-4. In every wave that comes, the number of monsters is increased, level up. 
-
+4. In every wave that comes, the number of monsters is increased, level up. The game continues until you Quit or the health of the castle reaches 0.
