@@ -23,4 +23,4 @@ This is a tower defense game. The object of the game is to prevent monsters to r
 *Down load the zip folder in the Downloads tab called TowerD.
 
 or Click this link 
-http://puzzle.sci.csueastbay.edu/~vh8785/Softengr/TowerD.rar
+http://puzzle.sci.csueastbay.edu/~vh8785/Softengr/TowerD.zip
