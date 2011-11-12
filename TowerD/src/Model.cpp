@@ -5,6 +5,7 @@
 #include "include/View.h"
 #include <iostream>
 #include <cstring>
+#include <QTCore/qmath.h>
 
 using namespace std;
 
@@ -173,6 +174,7 @@ void Model::kill(int twrIndex, int mnstIndex)
         monsters.remove(mnstIndex);
         monsters.squeeze();
         castle->spendMoney(-50);
+        castle->addScore(qCeil(castle->getHealth()/10)); //Get the health of your castle, divides it by 10 and rounds it up then adds it to your score.
     }
 }
 

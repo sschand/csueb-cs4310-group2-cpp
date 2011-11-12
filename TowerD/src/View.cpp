@@ -178,7 +178,6 @@ void View::incrementMonsters(int *pth, int pthSz)
 
 void View::kill(QVector<int> deadMonsters)
 {
-
     for (int index = 0; index < deadMonsters.size(); index++)
     {
         monsters[deadMonsters[index]]->monsterItem->hide();
