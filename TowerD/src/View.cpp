@@ -32,7 +32,7 @@ View::View(QWidget *parent) :
     tower3Image = new QPixmap("resources/logo2.png");
     *tower3Image = tower3Image->scaled(34,34);
 
-    QPixmap *back = new QPixmap("resources/PositionTestBase.png");//TowerDBase.png
+    QPixmap *back = new QPixmap("resources/TowerDBase.png");//resources/PositionTestBase.png
     *back = back->scaledToWidth(801);
 
 

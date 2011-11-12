@@ -30,23 +30,15 @@ class	ArrayTowers : public GraphicsItem	// ArrayTowers class declaration "Inheri
                 {
                     return towers[2];
                 }
-                Tower1 putTowerT(int gn)
+               /* void putTowerT(int tower_type)
                 {
-                    int grdno = 0;
-                    grdno = gn;
-                    if (grdno == 205)
+                    if(tower_type = 1)
                     {
-                        return towers[0];
+                        towers[0].
                     }
-                    else if (grdno == 206)
-                    {
-                        return towers[1];
-                    }
-                    else if (grdno == 207)
-                    {
-                        return towers[2];
-                    }
-                }
+
+                }*/
+
 
 };
 
