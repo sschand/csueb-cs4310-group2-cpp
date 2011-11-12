@@ -43,6 +43,7 @@ Install step:
            
 3. Open the TowerD folder and open the TowerD (Qt project file). This should open Qt automatically and start parsing.
              
+
 4. Click Run (the green triangle) 
 
 
