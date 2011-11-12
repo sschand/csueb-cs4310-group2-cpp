@@ -18,10 +18,16 @@ This is a tower defense game. The object of the game is to prevent monsters to r
 
 
 = Set up Instructions =
-Project site: http://code.google.com/p/csueb-cs4310-group2-cpp/
+= Set up Instructions =
 
-1. Click on the Downloads tab of our google project site.
-*Down load the zip folder in the Downloads tab called TowerD.
+Requirements:
+             * Must have Qt installed on your machine.
+
+Install step:
+             # Download the folder labeld "TowerD.zip" to your desktop or folder of your choice from the downloads section.
+             # Extract the files from the folder. (Usually done by right clicking on the zipped folder and clicking on "Extract all". Then just follow the prompts on your screen.)
+           
+             
 
 or Click this link 
-http://puzzle.sci.csueastbay.edu/~vh8785/Softengr/TowerD.zip
+http://puzzle.sci.csueastbay.edu/~vh8785/Softengr/TowerD.rar
