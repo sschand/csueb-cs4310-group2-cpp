@@ -19,7 +19,6 @@ This is a tower defense game. The object of the game is to prevent monsters to r
 
 = Set up Instructions =
 
-1.Click on the Downloads tab of our google project site.
+1.Click on the Downloads tab of our google project site.=
 2.Down load the zip folder in the Downloads tab called TowerD.
 3.
-
