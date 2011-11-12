@@ -7,6 +7,7 @@ Joshua Henninger
 Paola Medina 
 Richard 
 Emilio E. Venegas
+Sharol Chand
 
 = Introduction =
 
@@ -18,8 +19,9 @@ This is a tower defense game. The object of the game is to prevent monsters to r
 
 
 = Set up Instructions =
+Project site: http://code.google.com/p/csueb-cs4310-group2-cpp/
 
- # Click on the Downloads tab of our google project site.
+1. Click on the Downloads tab of our google project site.
 *Down load the zip folder in the Downloads tab called TowerD.
 
 or Click this link 
