@@ -33,9 +33,9 @@ private:
     QVector<Tower*> towers;
 
     ClickableArea *gameGrid, *towerGrid;
-    QPixmap *towerImage, *monsterImage;
+    QPixmap *monsterImage, *tower1Image, *tower2Image, *tower3Image, *loadedImage;
     QPushButton *start_quit;
-    QGraphicsPixmapItem *background, *selection1;
+    QGraphicsPixmapItem *background, *selection1, *selection2, *selection3;
     QGraphicsScene *scene;
     QGraphicsTextItem *score, *money, *health, *messageBoard;
     QGraphicsView *window;

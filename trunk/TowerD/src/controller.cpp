@@ -78,6 +78,14 @@ void Controller::towerChoice()
     {
         emit validTower(1);
     }
+    else if (x > 51 && x < 90)
+    {
+        emit validTower(2);
+    }
+    else if (x > 102 && x < 141)
+    {
+        emit validTower(3);
+    }
 }
 
 void Controller::addMonster()
