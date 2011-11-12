@@ -1,0 +1,17 @@
+
+
+= Introduction =
+
+*Currently we are working on being able to create an executable file for Qt that would allow you run the game, thus by-passing all required the steps listed in this wiki to make the game run.
+
+Qt is a programming software used to create software application that utilize a GUI (Graphic User Interface). The coding language we used to create this game was C++.
+
+This is a tower defense game. The object of the game is to prevent monsters to reach your castle. The monsters get killed by towers that are placed along their path of travel. The user places towers along the side of the path and the towers shoot and damage the monsters health. Once the health of the monsters is brought to zero, the monsters die.
+
+
+= Installation =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
