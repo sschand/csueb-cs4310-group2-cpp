@@ -57,3 +57,7 @@ void Castle::spendMoney(int mny)
     money -= mny;
 }
 
+void Castle::addScore(int scr) {
+    score += scr;
+}
+

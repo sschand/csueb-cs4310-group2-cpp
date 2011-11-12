@@ -45,6 +45,7 @@ class Castle : public GraphicsItem //Castle is a child of Graphics Item.
                 int getMoney();
                 int getScore();
                 void spendMoney(int mny);
+                void addScore(int scr);
 };
 #endif
 
