@@ -23,10 +23,16 @@ View::View(QWidget *parent) :
     monsterImage = new QPixmap("resources/greenMonster.png");//monster.pngdemon.pngblueMonster.png
     *monsterImage = monsterImage->scaled(34,34);
 
-    towerImage = new QPixmap("resources/tower.png");//rook.png
-    *towerImage = towerImage->scaled(34,34);
+    tower1Image = new QPixmap("resources/tower.png");//rook.png
+    *tower1Image = tower1Image->scaled(34,34);
 
-    QPixmap *back = new QPixmap("resources/TowerDBase.png");//PositionTestBase.png
+    tower2Image = new QPixmap("resources/logo1.png");
+    *tower2Image = tower2Image->scaled(34,34);
+
+    tower3Image = new QPixmap("resources/logo2.png");
+    *tower3Image = tower3Image->scaled(34,34);
+
+    QPixmap *back = new QPixmap("resources/PositionTestBase.png");//TowerDBase.png
     *back = back->scaledToWidth(801);
 
 
@@ -35,7 +41,9 @@ View::View(QWidget *parent) :
                     scene->addWidget(gameGrid);
                     scene->addWidget(towerGrid);
     background    = scene->addPixmap(*back);
-    selection1    = scene->addPixmap(*towerImage);
+    selection1    = scene->addPixmap(*tower1Image);
+    selection2    = scene->addPixmap(*tower2Image);
+    selection3    = scene->addPixmap(*tower3Image);
     score         = scene->addText(QString::number(0), QFont("Times", 14, 2));
     money         = scene->addText(QString::number(0), QFont("Times", 14, 2));
     health        = scene->addText(QString::number(0), QFont("Times", 14, 2));
@@ -48,6 +56,10 @@ View::View(QWidget *parent) :
     item->setDefaultTextColor(QColor(0,255,0));
     selection1->moveBy(140,444);
     selection1->scale(1.1176,1.1176);
+    selection2->moveBy(191,444);
+    selection2->scale(1.1176,1.1176);
+    selection3->moveBy(242,444);
+    selection3->scale(1.1176,1.1176);
     score->moveBy(715, 250);
     money->moveBy(715, 315);
     health->moveBy(715, 380);
@@ -92,7 +104,7 @@ void View::addTower(int x, int y, int grdNmbr)
 {
     Tower * temp;
     temp = new Tower;
-    temp->towerItem = scene->addPixmap(*towerImage);
+    temp->towerItem = scene->addPixmap(*loadedImage);
     temp->gridNumber = grdNmbr;
 
     x = x/34;
@@ -116,8 +128,18 @@ void View::loadTower(int twrChc)
     {
     case 1:
         loaded = true;
+        loadedImage = tower1Image;
+        break;
+    case 2:
+        loaded = true;
+        loadedImage = tower2Image;
+        break;
+    case 3:
+        loaded = true;
+        loadedImage = tower3Image;
         break;
     default:
+        loaded = false;
         break;
     }
 }
