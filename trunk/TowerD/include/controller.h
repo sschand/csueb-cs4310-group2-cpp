@@ -23,7 +23,6 @@ public:
     explicit Controller( QWidget * parent = 0 );
 
     void addViewModel(View*, Model*);
-
 signals:
     void validTower(int twrChc);
 
@@ -36,6 +35,7 @@ public slots:
     void stopClocks();
     void nextLevel();
     void endGame(bool win);
+
 
 };
 

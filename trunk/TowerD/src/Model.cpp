@@ -31,9 +31,10 @@ Model::Model(QWidget *parent) : QWidget(parent)
     setTowerTypes();
 }
 
-bool Model::addTower(int grid_number_space, int h )
+bool Model::addTower(int grid_number_space)
 
 {
+
 
     //setting the types to the selected type of tower.
    /*   type1=h;
