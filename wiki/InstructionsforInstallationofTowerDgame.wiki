@@ -22,6 +22,12 @@ This is a tower defense game. The object of the game is to prevent monsters to r
 Requirements:
              * Must have Qt installed on your machine.
 
+Installation files for Qt SDK version 1.1.3 available under "downloads"
+
+OR install from here: http://qt.nokia.com/downloads
+
+****IN ORDER TO USE THIS DOWNLOAD, YOU MUST BE CONNECTED TO THE INTERNET******
+
 Install step:
 
 1. Download the folder labeld "TowerD.zip" to your desktop or folder of your choice from the downloads section.
