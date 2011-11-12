@@ -59,5 +59,7 @@ How to play the Tower Defense game:
 4. In every wave that comes, the number of monsters is increased, level up. The game continues until you Quit or the health of the castle reaches 0.
 
 
+5. When you are done playing, you can simply close the game window and the Qt project.
+
 
 Enjoy the game!
