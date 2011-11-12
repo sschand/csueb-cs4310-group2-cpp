@@ -1,11 +1,12 @@
 #labels Phase-Deploy,Phase-QA
-= TowerD Tower Defense Game =
-= Developers =
-= Sharol Chand =
-= Adam Vierra =
-= Joshua Henninger =
-= Paola Medina =
-= Richard =
+= TowerD Defense Game =
+Developers:
+Sharol Chand
+Adam Vierra
+Joshua Henninger
+Paola Medina 
+Richard 
+Emilio E. Venegas
 
 = Introduction =
 
@@ -16,9 +17,9 @@ Qt is a programming software used to create software application that utilize a 
 This is a tower defense game. The object of the game is to prevent monsters to reach your castle. The monsters get killed by towers that are placed along their path of travel. The user places towers along the side of the path and the towers shoot and damage the monsters health. Once the health of the monsters is brought to zero, the monsters die.
 
 
-= Installation =
+= Set up Instructions =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+1.Click on the Downloads tab of our google project site.
+2.Down load the zip folder in the Downloads tab called TowerD.
+3.
+
