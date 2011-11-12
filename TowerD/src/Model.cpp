@@ -31,8 +31,25 @@ Model::Model(QWidget *parent) : QWidget(parent)
     setTowerTypes();
 }
 
-bool Model::addTower(int grid_number_space)
+bool Model::addTower(int grid_number_space, int h )
+
 {
+
+    //setting the types to the selected type of tower.
+   /*   type1=h;
+      type2=h;
+      type3=h;
+
+    //here it is the copy of the valu
+      int[3] copyT;
+   int[0] = type1;
+   int[1] = type2;
+   int[2] = type3;
+
+   // sending the type values
+    void setTowerTypes();  */
+
+
 
     /*towers.push_back(new Tower1(obj)); THIS WILL BE USED ONCE WE GET THE ARRAY OF MONSTERS GOING
     int vect_space = towers.size() - 1;

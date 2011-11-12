@@ -47,9 +47,9 @@ class Model : QWidget //inherited from QWidget
         public:
                 explicit Model( QWidget * parent = 0 ); //Constructor
 
-                bool addTower(int);//we are going to match up the grid number being clicked,
+                bool addTower(int,int);//we are going to match up the grid number being clicked,
                                    //to the grid number in one of the three towers that will be in the TowerArray object. Thus allowing us
-                                   //to create a tower, by copying the tower object, of the correct Tower that is being selected bye the user.
+                                   //to create a tower, by copying the tower object, of the correct Tower that is being selected by the user.
                 void addMonster(); //adds a Monster.
                 Castle * getCastle();
                 ArrayPath * getArray_path();
