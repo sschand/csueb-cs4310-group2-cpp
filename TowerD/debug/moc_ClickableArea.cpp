@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'ClickableArea.h'
 **
-** Created: Tue Nov 8 16:34:51 2011
+** Created: Fri Nov 11 14:51:31 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.4)
 **
 ** WARNING! All changes made in this file will be lost!
