@@ -1,5 +1,6 @@
 #include "include/Controller.h"
 
+
 Controller::Controller(QWidget *parent) :
     QWidget(parent)
 {
@@ -61,14 +62,15 @@ void Controller::addTower()
                 break;
             }
         }
-
+        if(gridNumber <205) // simple soultion to the bug fix
+        {
         if (!grdNmbrInPth && model->addTower(gridNumber))
         {
             view->addTower(x, y, gridNumber);
             view->updateStats(model->getCastle()->getHealth(),model->getCastle()->getMoney(),model->getCastle()->getScore());
         }
     }
-}
+}}
 
 void Controller::towerChoice()
 {
