@@ -23,7 +23,7 @@ class Castle : public GraphicsItem //Castle is a child of Graphics Item.
 	public:
                 Castle() //default constructor
                 {
-                    setCastle(100,500,0,68);
+                    setCastle(100,800,0,68);
 		}
 
                 Castle(int hlth, int mny, int scr, int gdn) //constuctor

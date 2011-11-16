@@ -21,6 +21,7 @@
 / Created by : Emilio E. Venegas
 /              Sharol Chand
 /              Paola Medina
+/
 */
 
 class Model : QWidget //inherited from QWidget
@@ -37,9 +38,10 @@ class Model : QWidget //inherited from QWidget
             Tower1 type2;
             Tower1 type3;
             ArrayTowers * atwr;
-            void setTowerTypes()
+
+            void setTowerTypes(const Tower1 &o,const Tower1 &q, const Tower1 &t) //(s.c. 11/10/11)
             {
-                atwr = new ArrayTowers(type1, type2, type3);
+                atwr = new ArrayTowers(o,q,t);
 
             }
 
@@ -47,10 +49,10 @@ class Model : QWidget //inherited from QWidget
         public:
                 explicit Model( QWidget * parent = 0 ); //Constructor
 
-                bool addTower(int/*,int*/);//we are going to match up the grid number being clicked,
-                                   //to the grid number in one of the three towers that will be in the TowerArray object. Thus allowing us
-                                   //to create a tower, by copying the tower object, of the correct Tower that is being selected by the user.
-                void addMonster(); //adds a Monster.
+                bool addTower(int,int); //we are going to match up the grid number being clicked,
+                                        //to the grid number in one of the three towers that will be in the TowerArray object. Thus allowing us
+                                        //to create a tower, by copying the tower object, of the correct Tower that is being selected by the user.
+                void addMonster();      //adds a Monster.
                 Castle * getCastle();
                 ArrayPath * getArray_path();
                 int getTowersSize();

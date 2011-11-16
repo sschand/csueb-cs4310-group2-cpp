@@ -1,6 +1,5 @@
 #include "include/Controller.h"
 
-
 Controller::Controller(QWidget *parent) :
     QWidget(parent)
 {
@@ -62,15 +61,16 @@ void Controller::addTower()
                 break;
             }
         }
-        if(gridNumber <205) // simple soultion to the bug fix
+        if(grdNmbrInPth < 205)
         {
-        if (!grdNmbrInPth && model->addTower(gridNumber))
-        {
-            view->addTower(x, y, gridNumber);
-            view->updateStats(model->getCastle()->getHealth(),model->getCastle()->getMoney(),model->getCastle()->getScore());
+            if (!grdNmbrInPth && (model->getCastle()->getMoney() > 100) && model->addTower(gridNumber, 1))
+            {
+                view->addTower(x, y, gridNumber);
+                view->updateStats(model->getCastle()->getHealth(),model->getCastle()->getMoney(),model->getCastle()->getScore());
+            }
         }
     }
-}}
+}
 
 void Controller::towerChoice()
 {
@@ -120,7 +120,7 @@ void Controller::connectQuit()
 {
     QObject::disconnect(view->getStart_Quit(), SIGNAL(clicked()), this, SLOT(connectQuit()));
     QObject::connect(view->getStart_Quit(), SIGNAL(clicked()), view->getWindow(), SLOT(close()));
-    view->getStart_Quit()->setText("Quit");
+    view->getStart_Quit()->setText("quit");
 
     model->nextLevel();
 

@@ -47,7 +47,7 @@ View::View(QWidget *parent) :
     score         = scene->addText(QString::number(0), QFont("Times", 14, 2));
     money         = scene->addText(QString::number(0), QFont("Times", 14, 2));
     health        = scene->addText(QString::number(0), QFont("Times", 14, 2));
-    messageBoard  = scene->addText("This is the message board!", QFont("Times", 16, 2));
+    messageBoard  = scene->addText("Click start to begin your game.", QFont("Times", 16, 2));
                     scene->addWidget(start_quit);
 
     QGraphicsTextItem* item = scene->addText("$100", QFont("Times", 12, 10));
