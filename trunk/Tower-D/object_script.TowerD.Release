@@ -1,0 +1,13 @@
+INPUT(
+./release\main.o
+./release\Castle.o
+./release\controller.o
+./release\Model.o
+./release\Monster.o
+./release\Tower1.o
+./release\View.o
+./release\ClickableArea.o
+./release\moc_controller.o
+./release\moc_View.o
+./release\moc_ClickableArea.o
+);
