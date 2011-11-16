@@ -10,45 +10,22 @@
 /     10/31/11
 */
 
-/*int Tower1::getFirePower()
+void Tower1::setTower1(int fp, bool cv, int sp, int gn)
 {
-    return FirePower;
+    damage = fp;
+    enemyInSight = cv;
+    shotCounter = sp;
+    Grid_Number = gn;
 }
-
-int Tower1::getCost_Value()
-{
-    return Cost_Value;
-}
-
-int Tower1::getShot_Speed()
-{
-    return Shot_Speed;
-}*/
 
 int Tower1::getGrid_Number()
 {
     return Grid_Number;
 }
-/*
+
 void Tower1::setGrid_Number(int Gn)
 {
     Grid_Number = Gn;
-}
-
-void Tower1::setTower1(int fp, int cv, int sp, int gn)
-{
-    FirePower = fp;
-    Cost_Value = cv;
-    Shot_Speed = sp;
-    Grid_Number = gn;
-}*/
-
-Tower1::Tower1(int grdNmbr)
-{
-    damage = 1;
-    Grid_Number = grdNmbr; //Grid number inherited from graphics item.
-    shotCounter = 0;
-    enemyInSight = false;
 }
 
 int Tower1::getDamage()
@@ -59,6 +36,16 @@ int Tower1::getDamage()
 int Tower1::getShotCounter()
 {
     return shotCounter;
+}
+
+void Tower1::setDamage(int d)
+{
+    damage = d;
+}
+
+void Tower1::setshotCounter(int s_counter)
+{
+    shotCounter = s_counter;
 }
 
 void Tower1::takeShot()
@@ -80,3 +67,15 @@ void Tower1::setSight(bool enemyInSght)
 {
     enemyInSight = enemyInSght;
 }
+
+int Tower1::getIndex_tower_type()
+{
+    return getIndex();//inherited from Graphics Item.
+}
+
+bool Tower1::getEnemyinSight()
+{
+    return enemyInSight;
+}
+
+

@@ -28,33 +28,21 @@ Model::Model(QWidget *parent) : QWidget(parent)
 
     castle = new Castle;
     mns_path = new ArrayPath;
-    setTowerTypes();
+
+    type1.setTower1(1,false,0,0);//(e.v. 11/15/11)Here the towers that were initialized using aggregation in the Model.h, are set with new
+    type2.setTower1(2,false,0,0);//(e.v. 11/15/11)independent values because each tower will be stronger than its previous one.
+    type3.setTower1(3,false,0,0);//(e.v. 11/15/11)Values for tower are set to these integers for testing purposes.
+
+    setTowerTypes(type1,type2,type3);//(s.c. 11/10/11)
+
+    atwr->choices[0].setTowerTypeindex(1);//(e.v. 11/15/11)this is tower 1 set to have an index of 1
+    atwr->choices[1].setTowerTypeindex(2);//(e.v. 11/15/11)this is tower 1 set to have an index of 2
+    atwr->choices[2].setTowerTypeindex(3);//(e.v. 11/15/11)this is tower 1 set to have an index of 3
 }
 
-bool Model::addTower(int grid_number_space)
-
+bool Model::addTower(int grid_number_space, int h)//(e.v. 11/15/11)
+                                                  //(p.m. 11/11/11)
 {
-
-
-    //setting the types to the selected type of tower.
-   /*   type1=h;
-      type2=h;
-      type3=h;
-
-    //here it is the copy of the valu
-      int[3] copyT;
-   int[0] = type1;
-   int[1] = type2;
-   int[2] = type3;
-
-   // sending the type values
-    void setTowerTypes();  */
-
-
-
-    /*towers.push_back(new Tower1(obj)); THIS WILL BE USED ONCE WE GET THE ARRAY OF MONSTERS GOING
-    int vect_space = towers.size() - 1;
-    towers[vect_space]->setGrid_Number(grid_number_space);*/
     bool exists = false;
 
         for (int index = 0; index < towers.size(); index++)
@@ -65,20 +53,35 @@ bool Model::addTower(int grid_number_space)
                 break;
             }
         }
+
         if (!exists && castle->getMoney() >= 100)
         {
-            castle->spendMoney(100);
-            towers.push_back(new Tower1(grid_number_space));
+            if(h == atwr->choices[0].getIndex_tower_type())
+            {
+              castle->spendMoney(100);//cost of tower
+              towers.push_back(new Tower1(atwr->choices[0]));
+              towers[towers.size() - 1]->setGrid_Number(grid_number_space);
+            }
+
+            if(h == atwr->choices[1].getIndex_tower_type())
+            {
+                castle->spendMoney(200);//cost of tower
+                towers.push_back(new Tower1(atwr->choices[1]));
+                towers[towers.size() - 1]->setGrid_Number(grid_number_space);
+            }
+
+            if(h == atwr->choices[2].getIndex_tower_type())
+            {
+                castle->spendMoney(300);//cost of tower
+                towers.push_back(new Tower1(atwr->choices[2]));
+                towers[towers.size() - 1]->setGrid_Number(grid_number_space);
+            }
             return true;
         }
         else
             return false;
-}
 
-/*void Model::initialize_add_Monster(const Monster &obj)//create a mosnter object in the function that will be calling creating
-{                                                     //the monsters. then just pass that object into this fucntion everytime
-    mnst.push_back(new Monster(obj));                 //you need that same monster type.
-}*/
+}
 
 void Model::addMonster()
 {

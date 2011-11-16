@@ -8,27 +8,30 @@
 class	ArrayTowers : public GraphicsItem	// ArrayTowers class declaration "Inherited from graphics item"
 {
         private:
-                Tower1 towers[3];
+
         public:
+                Tower1 * choices;
+
                 ArrayTowers ( const Tower1 &t1 , const Tower1 &t2 , const Tower1 &t3 )
                 {
-                        towers[0] = t1;
-                        towers[1] = t2;
-                        towers[2] = t3;
+                    choices = new Tower1[3];
+                        choices[0] = t1;
+                        choices[1] = t2;
+                        choices[2] = t3;
                 }
-                Tower1 get_tower1()
+                const Tower1 get_tower1()
                 {
-                    return towers[0];
-                }
-
-                Tower1 get_tower2()
-                {
-                    return towers[1];
+                    return choices[0];
                 }
 
-                Tower1 get_tower3()
+                const Tower1 get_tower2()
                 {
-                    return towers[2];
+                    return choices[1];
+                }
+
+                const Tower1 get_tower3()
+                {
+                    return choices[3];
                 }
                /* void putTowerT(int tower_type)
                 {

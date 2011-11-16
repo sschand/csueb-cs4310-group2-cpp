@@ -2,6 +2,7 @@
 #define MONSTER_H
 #include "..\include\GraphicsItem.h"
 
+
 class Monster : public GraphicsItem	//monster class declaration "Inherited from graphics item"
 {
         private:
@@ -34,7 +35,6 @@ class Monster : public GraphicsItem	//monster class declaration "Inherited from 
                 void setMonster(int,int);//extra int is to set grid number.
                 int getupdated_Damage();
                 void hit(int dmg);
-
 
 
 };

@@ -17,53 +17,47 @@
 class Tower1 : public GraphicsItem //tower class declaration inherits from graphics item
 {
 	private:
-                int FirePower; //holds fire power of the tower
-		int Cost_Value;//holds the cost it has to buy the tower
-                int Shot_Speed;//holds the shot speed of the tower (intervals)
-
                 int damage;
-
-                int shotCounter;
                 int enemyInSight;
+                int shotCounter;
+
 
 	public:
 		Tower1() //constructor
 		{
-                        //setTower1(10,10,3,0);//remember to change the grid number and attributes using the default constructor to give each tower
+                   setTower1(10,false,3,0);//remember to change the grid number and attributes using the default constructor to give each tower
                                              //a diferent grid number
-
-                    damage = 10;
-                    shotCounter = 3;
-                    enemyInSight = false;
                 }
 
-                Tower1(int fp, int cv, int ss, int gn) //this constructor will be used once we figure out what tower tha gamer will buy or purchase.
+                Tower1(int dm, bool enm, int shc, int gn) //this constructor will be used once we figure out what tower tha gamer will buy or purchase.
 		{
-                        setTower1(fp,cv,ss,gn);
+                        setTower1(dm,shc,enm,gn);
 		}
 
                 Tower1(const Tower1 &obj)//copy constructor that accepts a Tower objects and makes a copy.
                 {
-                    setTower1(obj.FirePower,obj.Cost_Value,obj.Shot_Speed,obj.Grid_Number);
+                    setTower1(obj.damage,obj.enemyInSight,obj.shotCounter,obj.Grid_Number);
 
                 }
 
-                Tower1(int grdNumber);
-
-
-                int getFirePower(); //returns the fire power
-                int getCost_Value(); //returns the value or amount needed to buy the tower
-                int getShot_Speed();  //returns the shot speed of teh tower
-                int getGrid_Number();
-                void setGrid_Number(int);
-                void setTower1(int,int,int,int);
+                Tower1(int grdNumber)
+                {
+                    setTower1(1,false,0,grdNumber);
+                }
 
                 int getDamage();
+                bool getEnemyinSight();
                 int getShotCounter();
+                int getGrid_Number();
+                int getIndex_tower_type();
+                void setTower1(int,bool,int,int);
+                void setDamage(int);
+                void setshotCounter(int);
+                void setSight(bool enemyInSght);
+                void setGrid_Number(int);
                 void takeShot();
                 void resetShotCounter();
                 bool enemyIsInSight();
-                void setSight(bool enemyInSght);
 
 };
 #endif

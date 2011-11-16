@@ -5,9 +5,10 @@
 /
 / This is a class that creates an arraypath interface. It holds the array for one of the path that will be part of the game.
 /
-/ Created by : Emilio E. Venegas
-/              Sharol Chand
+/ Created by : Sharol Chand
 /              Paola Medina
+/              Emilio E. Venegas
+/
 */
 
 class ArrayPath //This object holds the array "path" monsters will be travelling on.
@@ -84,7 +85,7 @@ class ArrayPath //This object holds the array "path" monsters will be travelling
                     path[x++] = 0;
             }
 
-            int * getPath() //this function is used to access the path array through a pointer, and therefore have access to its contents. Grid numbers.
+            int * getPath() //this function is used to access the path array through a pointer, and therefore returns the array.
             {
                 return path;
             }

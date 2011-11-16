@@ -17,8 +17,8 @@ class GraphicsItem //"will be inherited by other classes"
 {
         protected:
 
-                int Grid_Number; //holds the grid number
-                int Tower_type_index; //holds the different types of towers
+                int Grid_Number; //(e.v. 11/15/11)holds the grid number
+                int Tower_type_index; //(e.v. 11/15/11)holds an index number that will be used to differentiate the different types of towers.
 
         private:
 
@@ -27,7 +27,17 @@ class GraphicsItem //"will be inherited by other classes"
                 GraphicsItem()
                 {
                     Grid_Number = 0;
+                    Tower_type_index = 0;
 
+                }
+                void setTowerTypeindex(int tp)
+                {
+                    Tower_type_index = tp;
+                }
+
+                int getIndex()//(e.v. 11/15/11)used to retrive tower index.
+                {
+                    return Tower_type_index;
                 }
 };
 #endif

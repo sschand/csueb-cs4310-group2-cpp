@@ -1,4 +1,5 @@
 #include "include/Monster.h"
+#include <QWidget>
 
 /*Monster
 /.cpp file for Monster class
@@ -23,17 +24,17 @@ Monster::Monster(int lvl)
 
     switch(lvl)
     {
-    case 1:
-        Attack_Value_and_Health = 4;//how much damage Monster inflicts at level 1
+    case 1:    //all attack values ar set to 1 to test how towers function. 11/15/11
+        Attack_Value_and_Health = 1;//how much damage Monster inflicts at level 1
         break;
     case 10:
-        Attack_Value_and_Health = 8;//how much damage Monster inflicts at level 10
+        Attack_Value_and_Health = 1;//how much damage Monster inflicts at level 10
         break;
     case 12:
-        Attack_Value_and_Health = 15;//how much damage Monster inflicts at level 12
+        Attack_Value_and_Health = 1;//how much damage Monster inflicts at level 12
         break;
     case 16:
-        Attack_Value_and_Health = 127;//how much damage Monster inflicts at level 16
+        Attack_Value_and_Health = 1;//how much damage Monster inflicts at level 16
         break;
     default:
         break;
