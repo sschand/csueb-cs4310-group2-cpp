@@ -50,10 +50,19 @@ View::View(QWidget *parent) :
     messageBoard  = scene->addText("Click start to begin your game.", QFont("Times", 16, 2));
                     scene->addWidget(start_quit);
 
-    QGraphicsTextItem* item = scene->addText("$100", QFont("Times", 12, 10));
+    QGraphicsTextItem * item = scene->addText("$100", QFont("Times", 12, 10));
+    QGraphicsTextItem * item2 = scene->addText("$200", QFont("Times", 12, 10));//This adds the text for the cost value of the towers.(e.v. 11/16/11)
+    QGraphicsTextItem * item3 = scene->addText("$300", QFont("Times", 12, 10));//This adds the text for the cost value of the towers.(e.v. 11/16/11)
 
     item->moveBy(136, 475);
-    item->setDefaultTextColor(QColor(0,255,0));
+    item->setDefaultTextColor(QColor(0,0,0));
+
+    item2->moveBy(189, 475);//This adds the text for the cost value of the towers.(e.v. 11/16/11)
+    item2->setDefaultTextColor(QColor(0,0,0));
+
+    item3->moveBy(240, 475);//This adds the text for the cost value of the towers.(e.v. 11/16/11)
+    item3->setDefaultTextColor(QColor(0,0,0));
+
     selection1->moveBy(140,444);
     selection1->scale(1.1176,1.1176);
     selection2->moveBy(191,444);
@@ -124,6 +133,8 @@ bool View::isLoaded()
 
 void View::loadTower(int twrChc)
 {
+    TwrType = twrChc; //(e.v.,j.h)At this point the user has made a tower selection on the view, and has clicked it. This TwrType int will be set with the index(tower choice made by user) so that the addtower() in the model can receive the index and create the right tower type in the model.
+
     switch(twrChc)
     {
     case 1:
@@ -263,4 +274,9 @@ void View::drawAroundPath(int *pth, int pthSz)
             p->moveBy(x,y);
         }
     }
+}
+
+int View::getTower_type_from_view() //(e.v. 11/16/11)This fucntion is used to return the tower type index from the view. Mainly used in the crontroller to send retrieve the index from the selected tower and send it to the addtower() function in the model. Used in the controller.cpp line 65.
+{
+    return TwrType;
 }
