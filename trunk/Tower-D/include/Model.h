@@ -62,6 +62,11 @@ class Model : QWidget //inherited from QWidget
                 int getLevel();
                 void nextLevel();
                 int getMonsterSize();
+                ArrayTowers * getTower_array()
+                {
+                    return atwr;
+                }
+
 
 
 };

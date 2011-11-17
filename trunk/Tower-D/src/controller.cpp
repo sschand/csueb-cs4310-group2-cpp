@@ -63,7 +63,7 @@ void Controller::addTower()
         }
         if(grdNmbrInPth < 205)
         {
-            if (!grdNmbrInPth && (model->getCastle()->getMoney() > 100) && model->addTower(gridNumber, 1))
+            if (!grdNmbrInPth && (model->getCastle()->getMoney() > 100) && model->addTower(gridNumber, view->getTower_type_from_view()))
             {
                 view->addTower(x, y, gridNumber);
                 view->updateStats(model->getCastle()->getHealth(),model->getCastle()->getMoney(),model->getCastle()->getScore());

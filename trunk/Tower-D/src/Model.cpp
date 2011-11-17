@@ -56,7 +56,7 @@ bool Model::addTower(int grid_number_space, int h)//(e.v. 11/15/11)
 
         if (!exists && castle->getMoney() >= 100)
         {
-            if(h == atwr->choices[0].getIndex_tower_type())
+            if(h == 1)
             {
               castle->spendMoney(100);//cost of tower
               towers.push_back(new Tower1(atwr->choices[0]));

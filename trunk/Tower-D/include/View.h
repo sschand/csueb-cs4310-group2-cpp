@@ -39,7 +39,8 @@ private:
     QGraphicsScene *scene;
     QGraphicsTextItem *score, *money, *health, *messageBoard;
     QGraphicsView *window;
-
+    int TwrType; //This tower tyoe index has the same function that the tower type has in the model. It serves as a reference to know what tower the users has clicked. It will be reset every time the user makes a tower choice.
+                 //(e.v.,j.h. 11/16/11)
 public:
     explicit View( QWidget * parent = 0 );
 
@@ -57,7 +58,7 @@ public:
     void kill(QVector<int>);
     void printMsg(QString);
     void drawAroundPath(int *pth, int pthSz);
-
+    int getTower_type_from_view();
 public slots:
     void loadTower(int twrChc);
     void clearMessage();
