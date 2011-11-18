@@ -37,11 +37,12 @@ class Model : QWidget //inherited from QWidget
             Tower1 type1;
             Tower1 type2;
             Tower1 type3;
+            Tower1 type4;
             ArrayTowers * atwr;
 
-            void setTowerTypes(const Tower1 &o,const Tower1 &q, const Tower1 &t) //(s.c. 11/10/11)
+            void setTowerTypes(const Tower1 &o,const Tower1 &q, const Tower1 &t, const Tower1 &a) //(s.c. 11/10/11)
             {
-                atwr = new ArrayTowers(o,q,t);
+                atwr = new ArrayTowers(o,q,t,a);
 
             }
 

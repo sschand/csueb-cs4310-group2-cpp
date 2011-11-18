@@ -32,12 +32,15 @@ Model::Model(QWidget *parent) : QWidget(parent)
     type1.setTower1(1,false,0,0);//(e.v. 11/15/11)Here the towers that were initialized using aggregation in the Model.h, are set with new
     type2.setTower1(2,false,0,0);//(e.v. 11/15/11)independent values because each tower will be stronger than its previous one.
     type3.setTower1(3,false,0,0);//(e.v. 11/15/11)Values for tower are set to these integers for testing purposes.
+    type4.setTower1(4,false,0,0);
 
-    setTowerTypes(type1,type2,type3);//(s.c. 11/10/11)
+
+    setTowerTypes(type1,type2,type3,type4);//(s.c. 11/10/11)
 
     atwr->choices[0].setTowerTypeindex(1);//(e.v. 11/15/11)this is tower 1 set to have an index of 1
     atwr->choices[1].setTowerTypeindex(2);//(e.v. 11/15/11)this is tower 1 set to have an index of 2
     atwr->choices[2].setTowerTypeindex(3);//(e.v. 11/15/11)this is tower 1 set to have an index of 3
+    atwr->choices[3].setTowerTypeindex(4);
 }
 
 bool Model::addTower(int grid_number_space, int h)//(e.v. 11/15/11)
@@ -74,6 +77,12 @@ bool Model::addTower(int grid_number_space, int h)//(e.v. 11/15/11)
             {
                 castle->spendMoney(300);//cost of tower
                 towers.push_back(new Tower1(atwr->choices[2]));
+                towers[towers.size() - 1]->setGrid_Number(grid_number_space);
+            }
+            if(h == atwr->choices[3].getIndex_tower_type())
+            {
+                castle->spendMoney(400);//cost of tower
+                towers.push_back(new Tower1(atwr->choices[3]));
                 towers[towers.size() - 1]->setGrid_Number(grid_number_space);
             }
             return true;
