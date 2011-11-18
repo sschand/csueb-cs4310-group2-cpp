@@ -32,6 +32,9 @@ View::View(QWidget *parent) :
     tower3Image = new QPixmap("resources/logo2.png");
     *tower3Image = tower3Image->scaled(34,34);
 
+    tower4Image = new QPixmap("resources/tower4.png");
+    *tower4Image = tower4Image->scaled(34,34);
+
     QPixmap *back = new QPixmap("resources/TowerDBase.png");//resources/PositionTestBase.png
     *back = back->scaledToWidth(801);
 
@@ -44,6 +47,7 @@ View::View(QWidget *parent) :
     selection1    = scene->addPixmap(*tower1Image);
     selection2    = scene->addPixmap(*tower2Image);
     selection3    = scene->addPixmap(*tower3Image);
+    selection4    = scene->addPixmap(*tower4Image);
     score         = scene->addText(QString::number(0), QFont("Times", 14, 2));
     money         = scene->addText(QString::number(0), QFont("Times", 14, 2));
     health        = scene->addText(QString::number(0), QFont("Times", 14, 2));
@@ -53,6 +57,7 @@ View::View(QWidget *parent) :
     QGraphicsTextItem * item = scene->addText("$100", QFont("Times", 12, 10));
     QGraphicsTextItem * item2 = scene->addText("$200", QFont("Times", 12, 10));//This adds the text for the cost value of the towers.(e.v. 11/16/11)
     QGraphicsTextItem * item3 = scene->addText("$300", QFont("Times", 12, 10));//This adds the text for the cost value of the towers.(e.v. 11/16/11)
+    QGraphicsTextItem * item4 = scene->addText("$400", QFont("Times", 12, 10));
 
     item->moveBy(136, 475);
     item->setDefaultTextColor(QColor(0,0,0));
@@ -63,12 +68,17 @@ View::View(QWidget *parent) :
     item3->moveBy(240, 475);//This adds the text for the cost value of the towers.(e.v. 11/16/11)
     item3->setDefaultTextColor(QColor(0,0,0));
 
+    item4->moveBy(291, 475);
+    item4->setDefaultTextColor(QColor(0,0,0));
+
     selection1->moveBy(140,444);
     selection1->scale(1.1176,1.1176);
     selection2->moveBy(191,444);
     selection2->scale(1.1176,1.1176);
     selection3->moveBy(242,444);
     selection3->scale(1.1176,1.1176);
+    selection4->moveBy(292,444);
+    selection4->scale(1.1176,1.1176);
     score->moveBy(715, 250);
     money->moveBy(715, 315);
     health->moveBy(715, 380);
@@ -148,6 +158,10 @@ void View::loadTower(int twrChc)
     case 3:
         loaded = true;
         loadedImage = tower3Image;
+        break;
+    case 4:
+        loaded = true;
+        loadedImage = tower4Image;
         break;
     default:
         loaded = false;
