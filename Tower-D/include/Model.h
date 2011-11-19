@@ -39,7 +39,7 @@ class Model : QWidget //inherited from QWidget
             Tower1 type3;
             Tower1 type4;
             ArrayTowers * atwr;
-
+            bool flag;
             void setTowerTypes(const Tower1 &o,const Tower1 &q, const Tower1 &t, const Tower1 &a) //(s.c. 11/10/11)
             {
                 atwr = new ArrayTowers(o,q,t,a);
@@ -48,6 +48,7 @@ class Model : QWidget //inherited from QWidget
 
 
         public:
+
                 explicit Model( QWidget * parent = 0 ); //Constructor
 
                 bool addTower(int,int); //we are going to match up the grid number being clicked,
@@ -68,7 +69,7 @@ class Model : QWidget //inherited from QWidget
                     return atwr;
                 }
 
-
-
+                bool getFlag(); // test
+                void setFlag(bool s);
 };
 #endif

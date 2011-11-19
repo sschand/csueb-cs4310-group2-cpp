@@ -65,9 +65,10 @@ void Controller::addTower()
         {
             if (!grdNmbrInPth && (model->getCastle()->getMoney() >= 100) && model->addTower(gridNumber, view->getTower_type_from_view()))
             {
+                if (model->getFlag() == true){
                 view->addTower(x, y, gridNumber);
                 view->updateStats(model->getCastle()->getHealth(),model->getCastle()->getMoney(),model->getCastle()->getScore());
-            }
+            }}
         }
     }
 }
