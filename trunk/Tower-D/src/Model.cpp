@@ -47,7 +47,7 @@ bool Model::addTower(int grid_number_space, int h)//(e.v. 11/15/11)
                                                   //(p.m. 11/11/11)
 {
     bool exists = false;
-
+        setFlag(false);
         for (int index = 0; index < towers.size(); index++)
         {
             if (grid_number_space == towers[index]->getGrid_Number())
@@ -59,31 +59,35 @@ bool Model::addTower(int grid_number_space, int h)//(e.v. 11/15/11)
 
         if (!exists && castle->getMoney() >= 100)
         {
-            if(h == 1)
+            if(h == 1 && castle->getMoney()>= 100)
             {
               castle->spendMoney(100);//cost of tower
               towers.push_back(new Tower1(atwr->choices[0]));
               towers[towers.size() - 1]->setGrid_Number(grid_number_space);
+              setFlag(true);
             }
 
-            if(h == atwr->choices[1].getIndex_tower_type())
+            if(h == atwr->choices[1].getIndex_tower_type() && castle->getMoney()>= 200)
             {
                 castle->spendMoney(200);//cost of tower
                 towers.push_back(new Tower1(atwr->choices[1]));
                 towers[towers.size() - 1]->setGrid_Number(grid_number_space);
+                setFlag(true);
             }
 
-            if(h == atwr->choices[2].getIndex_tower_type())
+            if(h == atwr->choices[2].getIndex_tower_type()&& castle->getMoney()>= 300)
             {
                 castle->spendMoney(300);//cost of tower
                 towers.push_back(new Tower1(atwr->choices[2]));
                 towers[towers.size() - 1]->setGrid_Number(grid_number_space);
+                setFlag(true);
             }
-            if(h == atwr->choices[3].getIndex_tower_type())
+            if(h == atwr->choices[3].getIndex_tower_type()&& castle->getMoney()>= 400)
             {
                 castle->spendMoney(400);//cost of tower
                 towers.push_back(new Tower1(atwr->choices[3]));
                 towers[towers.size() - 1]->setGrid_Number(grid_number_space);
+                setFlag(true);
             }
             return true;
         }
@@ -204,3 +208,11 @@ int Model::getMonsterSize()
     return monsters.size();
 }
 
+bool Model::getFlag()
+{
+    return flag;
+}
+void Model::setFlag(bool s)
+{
+    flag = s;
+}
