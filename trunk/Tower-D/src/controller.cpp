@@ -61,7 +61,7 @@ void Controller::addTower()
                 break;
             }
         }
-        if(grdNmbrInPth < 205)
+        if(gridNumber < 205)
         {
             if (!grdNmbrInPth && (model->getCastle()->getMoney() >= 100) && model->addTower(gridNumber, view->getTower_type_from_view()))
             {
