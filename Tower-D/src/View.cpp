@@ -38,12 +38,22 @@ View::View(QWidget *parent) :
     QPixmap *back = new QPixmap("resources/TowerDBase.png");//resources/PositionTestBase.png
     *back = back->scaledToWidth(801);
 
-
+    // Draws the background grid
+    QGraphicsRectItem *rect; // makes a rectangle item pointer
+    QBrush whiteBrush(Qt::white); // sets the brush white
+    QPen blackPen(Qt::black); // sets the pen black
+    blackPen.setWidth(6); // sets the width to 6 pixels
+    rect= scene->addRect(0,0,801,587,blackPen,whiteBrush); // draws the overall rectangle 801 pixels by 587 with black borders white fill
+    rect= scene->addRect(0,425,801,76,blackPen,whiteBrush); // draws the tower rectangle box
+    rect= scene->addRect(620,0,181,225,blackPen,whiteBrush); // draws the top right box
+    rect= scene->addRect(620,225,181,66,blackPen,whiteBrush); // draws the score box
+    rect= scene->addRect(620,291,181,67,blackPen,whiteBrush); // draws the money box
+    rect= scene->addRect(620,358,181,67,blackPen,whiteBrush); // draws the health box
 
 
                     scene->addWidget(gameGrid);
                     scene->addWidget(towerGrid);
-    background    = scene->addPixmap(*back);
+//   background    = scene->addPixmap(*back);
     selection1    = scene->addPixmap(*tower1Image);
     selection2    = scene->addPixmap(*tower2Image);
     selection3    = scene->addPixmap(*tower3Image);
@@ -59,6 +69,13 @@ View::View(QWidget *parent) :
     QGraphicsTextItem * item3 = scene->addText("$300", QFont("Times", 12, 10));//This adds the text for the cost value of the towers.(e.v. 11/16/11)
     QGraphicsTextItem * item4 = scene->addText("$400", QFont("Times", 12, 10));
 
+    QGraphicsTextItem * item5 = scene->addText("Score",QFont("Times",12,10)); // adds the score text
+    QGraphicsTextItem * item6 = scene->addText("Money",QFont("Times",12,10)); // adds the money text
+    QGraphicsTextItem * item7 = scene->addText("Health",QFont("Times",12,10)); // adds the health text
+    QGraphicsTextItem * item8 = scene->addText("Towers",QFont("Times",12,10)); // adds the tower text
+    QGraphicsTextItem * item9 = scene->addText("Messages",QFont("Times",12,10)); // addes the message text
+    QGraphicsTextItem * item10 = scene->addText("Tower-D",QFont("Times",18,10)); // addes the Tower-D text
+
     item->moveBy(136, 475);
     item->setDefaultTextColor(QColor(0,0,0));
 
@@ -70,6 +87,24 @@ View::View(QWidget *parent) :
 
     item4->moveBy(291, 475);
     item4->setDefaultTextColor(QColor(0,0,0));
+
+    item5->moveBy(625,230); // adds score text
+    item5->setDefaultTextColor(QColor(0,0,0));
+
+    item6->moveBy(625,296); // adds money text
+    item6->setDefaultTextColor(QColor(0,0,0));
+
+    item7->moveBy(625,363); // adds health text
+    item7->setDefaultTextColor(QColor(0,0,0));
+
+    item8->moveBy(5,430); // adds tower text
+    item8->setDefaultTextColor(QColor(0,0,0));
+
+    item9->moveBy(5,506); // adds message text
+    item9->setDefaultTextColor(QColor(0,0,0));
+
+    item10->moveBy(625,5); // adds message text
+    item10->setDefaultTextColor(QColor(0,0,0));
 
     selection1->moveBy(140,444);
     selection1->scale(1.1176,1.1176);
@@ -85,7 +120,7 @@ View::View(QWidget *parent) :
     messageBoard->moveBy(120, 530);
 
     window->setScene(scene);
-    window->resize(803, 590);
+    window->resize(810, 600);
     window->show();
 }
 
@@ -249,13 +284,18 @@ void View::printMsg(QString msg)
 
 void View::drawAroundPath(int *pth, int pthSz)
 {
-    QPixmap *path = new QPixmap("resources/softPath.png");//redTile.pngbrownPath.pngladyPath.pngpuzzlePath.pngmarble.png
-    *path = path->scaled(34, 34);
+    QGraphicsRectItem *rect;
+    QBrush blackBrush(Qt::black);
+    QPen redPen(Qt::red);
+    redPen.setWidth(1);
+  //  QPixmap *path = new QPixmap("resources/softPath.png");//redTile.pngbrownPath.pngladyPath.pngpuzzlePath.pngmarble.png
+  //  *path = path->scaled(34, 34);
 
     //QPixmap *back = new QPixmap("resources/dirt.png");//grass.pngblackMarble.png
     //*back = back->scaled(578,408);
 
-    QGraphicsPixmapItem *p;//,
+    QGraphicsItem *r;
+   // QGraphicsPixmapItem *p;//,
                         //*g = scene->addPixmap(*back);
     //g->moveBy(22,10);
 
@@ -284,12 +324,58 @@ void View::drawAroundPath(int *pth, int pthSz)
         }
         if (found)
         {
-            p = scene->addPixmap(*path);
-            p->moveBy(x,y);
+            rect =scene->addRect(0,0,34,34,redPen,blackBrush);
+            r = rect;
+            r->moveBy(x,y);
+          //  p = scene->addPixmap(*path);
+          //  p->moveBy(x,y);
         }
     }
 }
 
+void View::drawGrid()
+{
+    QGraphicsRectItem *rect;
+    QBrush blueBrush(Qt::blue);
+    QPen GreenPen(Qt::green);
+    GreenPen.setWidth(1);
+
+    QGraphicsItem *r;
+
+    int x, y;
+    for (int grdNmbr = 1; grdNmbr < 205; grdNmbr++)
+    {
+        if (grdNmbr%17 == 0)
+        {
+            x = 566;
+        }
+        else
+        {
+            x = (((grdNmbr%17)-1)*34)+22;
+        }
+        y = (((grdNmbr-1)/17)*34)+ 10;
+
+
+
+        {
+            rect =scene->addRect(0,0,34,34,GreenPen,blueBrush);
+            r = rect;
+            r->moveBy(x,y);
+
+        }
+    }
+
+}
+/*          // My attempt to have the top right corner actually display something
+void View::drawTopRight(int twrChc) //620,0,181,225, where it starts and how long it is
+{
+     QGraphicsPixmapItem * temp;
+    loadTower(twrChc);
+    temp = scene->addPixmap(*loadedImage);
+    temp->setPos(625,5);
+    temp->setScale(1.5);
+}
+ */
 int View::getTower_type_from_view() //(e.v. 11/16/11)This fucntion is used to return the tower type index from the view. Mainly used in the crontroller to send retrieve the index from the selected tower and send it to the addtower() function in the model. Used in the controller.cpp line 65.
 {
     return TwrType;
