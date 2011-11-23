@@ -31,7 +31,6 @@ private:
 
     QVector<Enemy*> monsters;
     QVector<Tower*> towers;
-
     ClickableArea *gameGrid, *towerGrid;
     QPixmap *monsterImage, *tower1Image, *tower2Image, *tower3Image, *tower4Image, *loadedImage;
     QPushButton *start_quit;
@@ -62,6 +61,8 @@ public:
 public slots:
     void loadTower(int twrChc);
     void clearMessage();
+    void drawGrid();
+    //void drawTopRight(int twrChc);
 
 };
 

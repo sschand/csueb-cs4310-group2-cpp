@@ -39,7 +39,9 @@ void Controller::addViewModel(View *v, Model *m)
 
     QObject::connect(gameTimer, SIGNAL(timeout()), this, SLOT(nextLevel()));
 
+    view->drawGrid();
     view->drawAroundPath(model->getArray_path()->getPath(), model->getArray_path()->getPathSize());
+
 
 }
 
@@ -68,6 +70,7 @@ void Controller::addTower()
                 if (model->getFlag() == true){
                 view->addTower(x, y, gridNumber);
                 view->updateStats(model->getCastle()->getHealth(),model->getCastle()->getMoney(),model->getCastle()->getScore());
+               // view->drawTopRight(view->getTower_type_from_view());
             }}
         }
     }
