@@ -48,7 +48,7 @@ public:
     QPushButton * getStart_Quit();
     QGraphicsView * getWindow();
 
-    void addMonster();
+    void addMonster(int grdNmbr);
     void addTower(int x, int y, int grdNmbr);
     bool isLoaded();
     void updateStats(int hlth, int mny, int scr);

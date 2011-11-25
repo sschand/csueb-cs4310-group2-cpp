@@ -11,7 +11,7 @@
 /     10/31/11
 */
 
-Monster::Monster(int lvl)
+Monster::Monster(int lvl, int space, int dummy)
 {
     if (lvl < 10)
         lvl = 1;
@@ -39,7 +39,7 @@ Monster::Monster(int lvl)
     default:
         break;
     }
-    Grid_Number = 86;
+    Grid_Number = space;
 }
 
 int Monster::getAttact_Value_and_Health()//Used to get attack/health of monsters individually at any moment if needed.
