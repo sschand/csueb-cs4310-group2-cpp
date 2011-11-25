@@ -101,7 +101,7 @@ void Controller::towerChoice()
 void Controller::addMonster()
 {
     model->addMonster();
-    view->addMonster();
+    view->addMonster(model->getArray_path()->getPathStart());
 }
 
 void Controller::incrementMonsters()

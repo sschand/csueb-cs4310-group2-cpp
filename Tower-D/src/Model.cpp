@@ -98,7 +98,7 @@ bool Model::addTower(int grid_number_space, int h)//(e.v. 11/15/11)
 
 void Model::addMonster()
 {
-    monsters.push_back(new Monster(level));
+    monsters.push_back(new Monster(level, getArray_path()->getPathStart(), 0));
 }
 
 Castle * Model::getCastle()
@@ -128,7 +128,7 @@ void Model::incrementMonsters()
                 break;
             }
         }
-        if (monsters[index]->getGrid_Number() == 0)
+        if (monsters[index]->getGrid_Number() == getArray_path()->getPathEnd())
         {
             castle->subtractHealth(monsters[index]->getupdated_Damage());
             monsters.remove(index);

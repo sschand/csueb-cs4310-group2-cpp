@@ -1,5 +1,8 @@
 #ifndef ARRAYPATH_H
 #define ARRAYPATH_H
+#include <time.h>
+#include <stdlib.h>
+#include <iostream>
 
 /*ArrayPath
 /
@@ -8,7 +11,7 @@
 / Created by : Sharol Chand
 /              Paola Medina
 /              Emilio E. Venegas
-/
+/              Adam Vierra
 */
 
 class ArrayPath //This object holds the array "path" monsters will be travelling on.
@@ -17,72 +20,69 @@ class ArrayPath //This object holds the array "path" monsters will be travelling
 
             int * path;
             int pathSize;
+            int start;
+            int end;
 
         public:
             ArrayPath()//constructor sets array size an initializes the array with the grid numbers of the game board.
             {
-                pathSize = 58;
+                pathSize = 100;
                 path = new int[pathSize];
-
                 int x = 0;
-                    path[x++] = 86;
-                    path[x++] = 87;
-                    path[x++] = 104;
-                    path[x++] = 105;
-                    path[x++] = 106;
-                    path[x++] = 123;
-                    path[x++] = 140;
-                    path[x++] = 157;
-                    path[x++] = 158;
-                    path[x++] = 159;
-                    path[x++] = 160;
-                    path[x++] = 143;
-                    path[x++] = 126;
-                    path[x++] = 109;
-                    path[x++] = 92;
-                    path[x++] = 75;
-                    path[x++] = 74;
-                    path[x++] = 57;
-                    path[x++] = 40;
-                    path[x++] = 23;
-                    path[x++] = 24;
-                    path[x++] = 25;
-                    path[x++] = 26;
-                    path[x++] = 27;
-                    path[x++] = 28;
-                    path[x++] = 45;
-                    path[x++] = 62;
-                    path[x++] = 79;
-                    path[x++] = 96;
-                    path[x++] = 95;
-                    path[x++] = 112;
-                    path[x++] = 129;
-                    path[x++] = 146;
-                    path[x++] = 163;
-                    path[x++] = 180;
-                    path[x++] = 181;
-                    path[x++] = 182;
-                    path[x++] = 165;
-                    path[x++] = 166;
-                    path[x++] = 167;
-                    path[x++] = 184;
-                    path[x++] = 185;
-                    path[x++] = 186;
-                    path[x++] = 169;
-                    path[x++] = 152;
-                    path[x++] = 135;
-                    path[x++] = 118;
-                    path[x++] = 117;
-                    path[x++] = 116;
-                    path[x++] = 99;
-                    path[x++] = 82;
-                    path[x++] = 65;
-                    path[x++] = 48;
-                    path[x++] = 49;
-                    path[x++] = 50;
-                    path[x++] = 67;
-                    path[x++] = 68;
-                    path[x++] = 0;
+                srand(time(0));
+                for (x = 0; x < 100; x++) {
+                    if (x==0) {
+                        path[x] = (rand() % 12) * 17 + 1;
+                        start = path[x];
+                    }
+                    else if (x >= 1) {
+                        bool redo = false;
+                        int direction = rand() % 3;
+                        switch (direction) {
+                        case 0:
+                            if (path[x - 1] <= 17) redo = true;
+                            if (!redo) {
+                                path[x] = path[x - 1] - 17;
+                                for (int y = 0; y < x - 1; y++) {
+                                    if (path[y]==path[x]||
+                                            path[y]==path[x] - 17||
+                                            path[y]==path[x] - 1||
+                                            path[y]==path[x] + 1) redo = true;
+                                }
+                            }
+                            break;
+                            case 1:
+                            if (path[x - 1] >= 188) redo = true;
+                            if (!redo) {
+                                path[x] = path[x - 1] + 17;
+                                for (int y = 0; y < x - 1; y++) {
+                                    if (path[y]==path[x]||
+                                            path[y]==path[x] + 17||
+                                            path[y]==path[x] - 1||
+                                            path[y]==path[x] + 1) redo = true;
+                                }
+                            }
+                            break;
+                            case 2:
+                            if (!redo) {
+                                path[x] = path[x - 1] + 1;
+                                for (int y = 0; y < x - 1; y++) {
+                                    if (path[y]==path[x]||
+                                        path[y]==path[x] - 17||
+                                        path[y]==path[x] + 17) redo = true;
+                                }
+                            }
+                            break;
+                        }
+                        if (redo) x--;
+                        if (path[x - 1] % 17 == 0) {
+                            end = path[x - 1];
+                            path[x] = 0;
+                            pathSize = x;
+                            x = 100;
+                        }
+                    }
+                }
             }
 
             int * getPath() //this function is used to access the path array through a pointer, and therefore returns the array.
@@ -93,6 +93,16 @@ class ArrayPath //This object holds the array "path" monsters will be travelling
             int getPathSize()//this returns the size of the path array, which is used in some of the algorythms in the controller.
             {
                 return pathSize;
+            }
+
+            int getPathStart() //Returns the first spot of the path
+            {
+                return start;
+            }
+
+            int getPathEnd() //Returns the last spot of the path
+            {
+                return end;
             }
 
 };

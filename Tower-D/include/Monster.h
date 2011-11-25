@@ -26,7 +26,7 @@ class Monster : public GraphicsItem	//monster class declaration "Inherited from 
                     setMonster(obj.Attack_Value_and_Health,obj.Grid_Number);
                 }
 
-                Monster(int dmg);
+                Monster(int dmg,int,int);
 
                 int getAttact_Value_and_Health();
                 int getGrid_Number();

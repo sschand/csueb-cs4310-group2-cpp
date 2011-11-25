@@ -144,11 +144,11 @@ QGraphicsView * View::getWindow()
     return window;
 }
 
-void View::addMonster()
+void View::addMonster(int grdNmbr)
 {
     Enemy * temp = new Enemy;
     temp->monsterItem = scene->addPixmap(*monsterImage);
-    temp->gridNumber = 86;
+    temp->gridNumber = grdNmbr;
 
     monsters.push_back(temp);
     printMonsters();
