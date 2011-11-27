@@ -20,6 +20,17 @@ View::View(QWidget *parent) :
     start_quit->move(628, 516);
     start_quit->resize(141, 55);
 
+    upgrade = new QPushButton("Upgrade");
+    upgrade->move(625, 155);
+    upgrade->resize(75, 25);
+
+    sell = new QPushButton("Sell");
+    sell->move(625, 180);
+    sell->resize(75, 25);
+
+    scene->addWidget(gameGrid);
+    scene->addWidget(towerGrid);
+
     monsterImage = new QPixmap("resources/greenMonster.png");//monster.pngdemon.pngblueMonster.png
     *monsterImage = monsterImage->scaled(34,34);
 
@@ -40,19 +51,27 @@ View::View(QWidget *parent) :
 
     // Draws the background grid
     QGraphicsRectItem *rect; // makes a rectangle item pointer
-    QBrush whiteBrush(Qt::white); // sets the brush white
+    QGradient *gradient = new QLinearGradient(QPoint(50,100),QPoint(200,400));
+    gradient->setColorAt(0,Qt::green);
+    gradient->setColorAt(.55,Qt::darkGreen);
+    gradient->setColorAt(1,Qt::green);
+    gradient->setSpread(gradient->ReflectSpread);
     QPen blackPen(Qt::black); // sets the pen black
     blackPen.setWidth(6); // sets the width to 6 pixels
-    rect= scene->addRect(0,0,801,587,blackPen,whiteBrush); // draws the overall rectangle 801 pixels by 587 with black borders white fill
-    rect= scene->addRect(0,425,801,76,blackPen,whiteBrush); // draws the tower rectangle box
-    rect= scene->addRect(620,0,181,225,blackPen,whiteBrush); // draws the top right box
-    rect= scene->addRect(620,225,181,66,blackPen,whiteBrush); // draws the score box
-    rect= scene->addRect(620,291,181,67,blackPen,whiteBrush); // draws the money box
-    rect= scene->addRect(620,358,181,67,blackPen,whiteBrush); // draws the health box
+    rect= scene->addRect(0,0,801,587,blackPen,QBrush(*gradient)); // draws the overall rectangle 801 pixels by 587 with black borders white fill
+    gradient->stops();
+    rect= scene->addRect(0,425,801,76,blackPen,QBrush(*gradient)); // draws the tower rectangle box
+    gradient->stops();
+    rect= scene->addRect(620,0,181,225,blackPen,QBrush(*gradient)); // draws the top right box
+    gradient->stops();
+    rect= scene->addRect(620,225,181,66,blackPen,QBrush(*gradient)); // draws the score box
+    gradient->stops();
+    rect= scene->addRect(620,291,181,67,blackPen,QBrush(*gradient)); // draws the money box
+    gradient->stops();
+    rect= scene->addRect(620,358,181,67,blackPen,QBrush(*gradient)); // draws the health box
+    gradient->stops();
 
 
-                    scene->addWidget(gameGrid);
-                    scene->addWidget(towerGrid);
 //   background    = scene->addPixmap(*back);
     selection1    = scene->addPixmap(*tower1Image);
     selection2    = scene->addPixmap(*tower2Image);
@@ -61,8 +80,13 @@ View::View(QWidget *parent) :
     score         = scene->addText(QString::number(0), QFont("Times", 14, 2));
     money         = scene->addText(QString::number(0), QFont("Times", 14, 2));
     health        = scene->addText(QString::number(0), QFont("Times", 14, 2));
+    level         = scene->addText(QString::number(0), QFont("Times", 14, 2));
     messageBoard  = scene->addText("Click start to begin your game.", QFont("Times", 16, 2));
                     scene->addWidget(start_quit);
+                    scene->addWidget(upgrade);
+                    scene->addWidget(sell);
+                    upgrade->hide();
+                    sell->hide();
 
     QGraphicsTextItem * item = scene->addText("$100", QFont("Times", 12, 10));
     QGraphicsTextItem * item2 = scene->addText("$200", QFont("Times", 12, 10));//This adds the text for the cost value of the towers.(e.v. 11/16/11)
@@ -73,8 +97,9 @@ View::View(QWidget *parent) :
     QGraphicsTextItem * item6 = scene->addText("Money",QFont("Times",12,10)); // adds the money text
     QGraphicsTextItem * item7 = scene->addText("Health",QFont("Times",12,10)); // adds the health text
     QGraphicsTextItem * item8 = scene->addText("Towers",QFont("Times",12,10)); // adds the tower text
-    QGraphicsTextItem * item9 = scene->addText("Messages",QFont("Times",12,10)); // addes the message text
+    QGraphicsTextItem * item9 = scene->addText("Level",QFont("Times",12,10)); // addes the message text
     QGraphicsTextItem * item10 = scene->addText("Tower-D",QFont("Times",18,10)); // addes the Tower-D text
+
 
     item->moveBy(136, 475);
     item->setDefaultTextColor(QColor(0,0,0));
@@ -117,11 +142,13 @@ View::View(QWidget *parent) :
     score->moveBy(715, 250);
     money->moveBy(715, 315);
     health->moveBy(715, 380);
+    level->moveBy(50,506);
     messageBoard->moveBy(120, 530);
 
     window->setScene(scene);
     window->resize(810, 600);
     window->show();
+    window->setMaximumSize(810,600);
 }
 
 ClickableArea * View::getGameGrid()
@@ -204,13 +231,15 @@ void View::loadTower(int twrChc)
     }
 }
 
-void View::updateStats(int hlth, int mny, int scr)
+void View::updateStats(int hlth, int mny, int scr, int lvl)
 {
     health->setPlainText(QString::number(hlth));
 
     money->setPlainText(QString::number(mny));
 
     score->setPlainText(QString::number(scr));
+
+    level->setPlainText(QString::number(lvl));
 }
 
 void View::printMonsters()
@@ -285,9 +314,13 @@ void View::printMsg(QString msg)
 void View::drawAroundPath(int *pth, int pthSz)
 {
     QGraphicsRectItem *rect;
-    QBrush blackBrush(Qt::black);
     QPen redPen(Qt::red);
     redPen.setWidth(1);
+    QGradient *gradient1 = new QLinearGradient(QPoint(0,0),QPoint(34,34));
+    gradient1->setColorAt(0,Qt::black);
+    gradient1->setColorAt(.55,Qt::darkGray);
+    gradient1->setColorAt(1,Qt::black);
+    gradient1->setSpread(gradient1->ReflectSpread);
   //  QPixmap *path = new QPixmap("resources/softPath.png");//redTile.pngbrownPath.pngladyPath.pngpuzzlePath.pngmarble.png
   //  *path = path->scaled(34, 34);
 
@@ -324,7 +357,8 @@ void View::drawAroundPath(int *pth, int pthSz)
         }
         if (found)
         {
-            rect =scene->addRect(0,0,34,34,redPen,blackBrush);
+            rect =scene->addRect(0,0,34,34,redPen,QBrush(*gradient1));
+            gradient1->stops();
             r = rect;
             r->moveBy(x,y);
           //  p = scene->addPixmap(*path);
@@ -336,9 +370,13 @@ void View::drawAroundPath(int *pth, int pthSz)
 void View::drawGrid()
 {
     QGraphicsRectItem *rect;
-    QBrush blueBrush(Qt::blue);
     QPen GreenPen(Qt::green);
     GreenPen.setWidth(1);
+    QGradient *gradient2 = new QLinearGradient(QPoint(0,0),QPoint(34,34));
+    gradient2->setColorAt(0,Qt::blue);
+    gradient2->setColorAt(.55,Qt::darkBlue);
+    gradient2->setColorAt(1,Qt::blue);
+    gradient2->setSpread(gradient2->ReflectSpread);
 
     QGraphicsItem *r;
 
@@ -358,7 +396,8 @@ void View::drawGrid()
 
 
         {
-            rect =scene->addRect(0,0,34,34,GreenPen,blueBrush);
+            rect =scene->addRect(0,0,34,34,GreenPen,QBrush(*gradient2));
+            gradient2->stops();
             r = rect;
             r->moveBy(x,y);
 

@@ -14,7 +14,7 @@ void Controller::addViewModel(View *v, Model *m)
 
     model = m;
 
-    view->updateStats(model->getCastle()->getHealth(),model->getCastle()->getMoney(),model->getCastle()->getScore());
+    view->updateStats(model->getCastle()->getHealth(),model->getCastle()->getMoney(),model->getCastle()->getScore(),model->getLevel());
 
     QObject::connect(view->getGameGrid(), SIGNAL(clicked()), this, SLOT(addTower()));
 
@@ -69,7 +69,7 @@ void Controller::addTower()
             {
                 if (model->getFlag() == true){
                 view->addTower(x, y, gridNumber);
-                view->updateStats(model->getCastle()->getHealth(),model->getCastle()->getMoney(),model->getCastle()->getScore());
+                view->updateStats(model->getCastle()->getHealth(),model->getCastle()->getMoney(),model->getCastle()->getScore(),model->getLevel());
                // view->drawTopRight(view->getTower_type_from_view());
             }}
         }
@@ -121,7 +121,7 @@ void Controller::incrementMonsters()
         view->kill(model->towersTakeShot());
     }
 
-    view->updateStats(model->getCastle()->getHealth(),model->getCastle()->getMoney(),model->getCastle()->getScore());
+    view->updateStats(model->getCastle()->getHealth(),model->getCastle()->getMoney(),model->getCastle()->getScore(), model->getLevel());
 }
 
 void Controller::connectQuit()
