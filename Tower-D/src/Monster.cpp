@@ -13,6 +13,10 @@
 
 Monster::Monster(int lvl, int space, int dummy)
 {
+    int health=1;
+    health = health + health* lvl;
+    Attack_Value_and_Health = health;
+    /*
     if (lvl < 10)
         lvl = 1;
     else if (lvl < 12)
@@ -38,7 +42,8 @@ Monster::Monster(int lvl, int space, int dummy)
         break;
     default:
         break;
-    }
+        */
+   // }
     Grid_Number = space;
 }
 
