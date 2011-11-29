@@ -29,10 +29,10 @@ Model::Model(QWidget *parent) : QWidget(parent)
     castle = new Castle;
     mns_path = new ArrayPath;
 
-    type1.setTower1(1,false,0,0,2);//(e.v. 11/15/11)Here the towers that were initialized using aggregation in the Model.h, are set with new
-    type2.setTower1(2,false,0,0,3);//(e.v. 11/15/11)independent values because each tower will be stronger than its previous one.
-    type3.setTower1(4,false,0,0,4);//(e.v. 11/15/11)Values for tower are set to these integers for testing purposes.
-    type4.setTower1(6,false,0,0,5);
+    type1.setTower1(1,false,0,0,2,100,1);//(e.v. 11/15/11)Here the towers that were initialized using aggregation in the Model.h, are set with new
+    type2.setTower1(2,false,0,0,3,200,2);//(e.v. 11/15/11)independent values because each tower will be stronger than its previous one.
+    type3.setTower1(4,false,0,0,4,300,3);//(e.v. 11/15/11)Values for tower are set to these integers for testing purposes.
+    type4.setTower1(6,false,0,0,5,400,4);
 
 
     setTowerTypes(type1,type2,type3,type4);//(s.c. 11/10/11)

@@ -10,13 +10,15 @@
 /     10/31/11
 */
 
-void Tower1::setTower1(int fp, bool cv, int sp, int gn,int ss)
+void Tower1::setTower1(int fp, bool cv, int sp, int gn,int ss, int c, int t)
 {
     damage = fp;
     enemyInSight = cv;
     shotCounter = sp;
     Grid_Number = gn;
     Shot_Speed= ss;
+    Cost = c;
+    tower_type=t;
 }
 
 int Tower1::getGrid_Number()
@@ -87,3 +89,16 @@ void Tower1::setShotSpeed(int ss)
     Shot_Speed= ss;
 }
 
+int Tower1::getCost()
+{
+    return Cost;
+}
+
+void Tower1::setCost(int c)
+{
+    Cost = c;
+}
+int Tower1::get_Tower_type()
+{
+    return tower_type;
+}

@@ -23,6 +23,7 @@ public:
     explicit Controller( QWidget * parent = 0 );
 
     void addViewModel(View*, Model*);
+    int grid;
 signals:
     void validTower(int twrChc);
 
@@ -36,6 +37,8 @@ public slots:
     void nextLevel();
     void endGame(bool win);
 
+    void Upgrade();  // upgrades selected tower
+    void Sell();    // sells selected tower
 
 };
 
