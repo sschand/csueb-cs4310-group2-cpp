@@ -69,6 +69,7 @@ void Controller::addTower()
 
         if(gridNumber < 205)
         {
+
             if (!grdNmbrInPth && (model->getCastle()->getMoney() >= 100) && model->addTower(gridNumber, view->getTower_type_from_view())
             ){
                 if (model->getFlag() == true){
@@ -87,10 +88,16 @@ void Controller::addTower()
                         spo=j;
                         break;
                     }
+                    else
+                    {
+                        spo =-1;
+                    }
                 }
-                view->drawTopRight(model->towers[spo]->get_Tower_type(),model->towers[spo]->getDamage(),model->towers[spo]->getShotSpeed(),model->towers[spo]->getCost()*1.5,model->towers[spo]->getCost()*.9);
+                if (spo >-1){
+
+               view->drawTopRight(model->towers[spo]->get_Tower_type(),model->towers[spo]->getDamage(),model->towers[spo]->getShotSpeed(),model->towers[spo]->getCost()*1.5,model->towers[spo]->getCost()*.9);
                QObject::connect(view->getUpgrade(),SIGNAL(clicked()),this,SLOT(Upgrade()));
-               QObject::connect(view->getSell(),SIGNAL(clicked()),this,SLOT(Sell()));
+               QObject::connect(view->getSell(),SIGNAL(clicked()),this,SLOT(Sell()));}
 
 
 
@@ -234,15 +241,20 @@ void Controller::Sell()
             spot =i;
             break;
         }
+        else
+        {
+            spot= -1;
+        }
     }
-
+    if(spot > -1)
+    {
     int cost = model->towers[spot]->getCost();
     cost = qCeil(cost * 0.9);
     model->getCastle()->spendMoney(-cost);
      model->towers.remove(spot);
     view->drawBox(grid);
     view->updateStats(model->getCastle()->getHealth(),model->getCastle()->getMoney(),model->getCastle()->getScore(), model->getLevel());
-
+}
 }
 }
 
