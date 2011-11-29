@@ -27,7 +27,7 @@
 class Model : QWidget //inherited from QWidget
 {
         private:
-            QVector <Tower1*> towers; //Creates a vector of Towers.
+
             QVector <Monster*> monsters;//Creates a vector of Monsters.
             ArrayPath * mns_path;// Creates a pointer that will point to the arry path that monsters will travel.
             Castle * castle;//Creates a pointer to the castle.
@@ -48,7 +48,7 @@ class Model : QWidget //inherited from QWidget
 
 
         public:
-
+                QVector <Tower1*> towers; //Creates a vector of Towers.
                 explicit Model( QWidget * parent = 0 ); //Constructor
 
                 bool addTower(int,int); //we are going to match up the grid number being clicked,

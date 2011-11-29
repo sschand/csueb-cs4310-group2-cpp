@@ -1,4 +1,5 @@
 #include "include/Controller.h"
+#include <QTCore/qmath.h>
 
 Controller::Controller(QWidget *parent) :
     QWidget(parent)
@@ -47,13 +48,15 @@ void Controller::addViewModel(View *v, Model *m)
 
 void Controller::addTower()
 {
+
     if (view->isLoaded())
     {
+        view->hideTopRight();
         int x = QCursor::pos().x() - view->getWindow()->window()->pos().x() - view->getGameGrid()->pos().x() - 9;
         int y = QCursor::pos().y() - view->getWindow()->window()->pos().y() - view->getGameGrid()->pos().y() - 29;
 
         int gridNumber = ((x/34)+1)+(y/34*17);
-
+        grid = gridNumber;
         bool grdNmbrInPth = false;
         for (int index = 0; index < model->getArray_path()->getPathSize(); index++)
         {
@@ -63,17 +66,40 @@ void Controller::addTower()
                 break;
             }
         }
+
         if(gridNumber < 205)
         {
-            if (!grdNmbrInPth && (model->getCastle()->getMoney() >= 100) && model->addTower(gridNumber, view->getTower_type_from_view()))
-            {
+            if (!grdNmbrInPth && (model->getCastle()->getMoney() >= 100) && model->addTower(gridNumber, view->getTower_type_from_view())
+            ){
                 if (model->getFlag() == true){
                 view->addTower(x, y, gridNumber);
                 view->updateStats(model->getCastle()->getHealth(),model->getCastle()->getMoney(),model->getCastle()->getScore(),model->getLevel());
-               // view->drawTopRight(view->getTower_type_from_view());
+                view->hideTopRight();
+
             }}
+            else if(!model->addTower(gridNumber, view->getTower_type_from_view()))
+            {
+                int spo;
+                for(int j=0; j<model->towers.size(); j++)
+                {
+                    if(grid == model->towers[j]->getGrid_Number())
+                    {
+                        spo=j;
+                        break;
+                    }
+                }
+                view->drawTopRight(model->towers[spo]->get_Tower_type(),model->towers[spo]->getDamage(),model->towers[spo]->getShotSpeed(),model->towers[spo]->getCost()*1.5,model->towers[spo]->getCost()*.9);
+               QObject::connect(view->getUpgrade(),SIGNAL(clicked()),this,SLOT(Upgrade()));
+               QObject::connect(view->getSell(),SIGNAL(clicked()),this,SLOT(Sell()));
+
+
+
+            }
+
         }
+
     }
+
 }
 
 void Controller::towerChoice()
@@ -96,6 +122,7 @@ void Controller::towerChoice()
     {
         emit validTower(4);
     }
+
 }
 
 void Controller::addMonster()
@@ -193,5 +220,60 @@ void Controller::endGame(bool win)
         QObject::disconnect(this, SIGNAL(validTower(int)), view, SLOT(loadTower(int)));
         view->printMsg("You lose!");
     }
+}
+
+void Controller::Sell()
+{
+    int spot;
+
+    {
+    for (int i=0; i< model->towers.size(); i++)
+    {
+        if(grid == model->towers[i]->getGrid_Number())
+        {
+            spot =i;
+            break;
+        }
+    }
+
+    int cost = model->towers[spot]->getCost();
+    cost = qCeil(cost * 0.9);
+    model->getCastle()->spendMoney(-cost);
+     model->towers.remove(spot);
+    view->drawBox(grid);
+    view->updateStats(model->getCastle()->getHealth(),model->getCastle()->getMoney(),model->getCastle()->getScore(), model->getLevel());
+
+}
+}
+
+void Controller::Upgrade()
+{
+
+    int spot;
+    for (int i=0; i< model->towers.size(); i++)
+    {
+        if(grid == model->towers[i]->getGrid_Number())
+        {
+            spot =i;
+            break;
+        }
+    }
+    int cost = model->towers[spot]->getCost();
+    cost =qCeil(cost * 1.5);
+    if(cost <= model->getCastle()->getMoney())
+    {
+    model->getCastle()->spendMoney(cost);
+    model->towers[spot]->setDamage(model->towers[spot]->getDamage()+1);
+    if(model->towers[spot]->getShotSpeed()>2)
+    {
+    model->towers[spot]->setShotSpeed(model->towers[spot]->getShotSpeed()-1);
+    }
+    else if(model->towers[spot]->getShotSpeed()==2)
+    {
+        model->towers[spot]->setShotSpeed(2);
+    }
+    model->towers[spot]->setCost(cost);
+    view->updateStats(model->getCastle()->getHealth(),model->getCastle()->getMoney(),model->getCastle()->getScore(), model->getLevel());
+}
 }
 

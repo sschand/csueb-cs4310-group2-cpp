@@ -46,6 +46,15 @@ View::View(QWidget *parent) :
     tower4Image = new QPixmap("resources/tower4.png");
     *tower4Image = tower4Image->scaled(34,34);
 
+    t1 = new QPixmap("resources/tower.png");
+    t2 = new QPixmap("resources/logo1.png");
+    t3 = new QPixmap("resources/logo2.png");
+    t4 = new QPixmap("resources/tower4.png");
+    *t1 = t1->scaled(65,65);
+    *t2 = t2->scaled(65,65);
+    *t3 = t3->scaled(65,65);
+    *t4 = t4->scaled(65,65);
+
     QPixmap *back = new QPixmap("resources/TowerDBase.png");//resources/PositionTestBase.png
     *back = back->scaledToWidth(801);
 
@@ -73,6 +82,18 @@ View::View(QWidget *parent) :
 
 
 //   background    = scene->addPixmap(*back);
+    s1    = scene->addPixmap(*t1);
+    s1->moveBy(625, 35);
+    s1->hide();
+    s2    = scene->addPixmap(*t2);
+    s2->moveBy(625, 35);
+    s2->hide();
+    s3    = scene->addPixmap(*t3);
+    s3->moveBy(625, 35);
+    s3->hide();
+    s4    = scene->addPixmap(*t4);
+    s4->moveBy(625, 35);
+    s4->hide();
     selection1    = scene->addPixmap(*tower1Image);
     selection2    = scene->addPixmap(*tower2Image);
     selection3    = scene->addPixmap(*tower3Image);
@@ -81,12 +102,33 @@ View::View(QWidget *parent) :
     money         = scene->addText(QString::number(0), QFont("Times", 14, 2));
     health        = scene->addText(QString::number(0), QFont("Times", 14, 2));
     level         = scene->addText(QString::number(0), QFont("Times", 14, 2));
+    damage        = scene->addText(QString::number(0), QFont("Times", 14, 2));
+    ShotSpee      = scene->addText(QString::number(0), QFont("Times", 14, 2));
+    damshow       = scene->addText(QString::number(0), QFont("Times", 14, 2));
+    Shotshow      = scene->addText(QString::number(0), QFont("Times", 14, 2));
+    cost          = scene->addText(QString::number(0), QFont("Times", 10, 2));
+    cost1         = scene->addText(QString::number(0), QFont("Times", 10, 2));
     messageBoard  = scene->addText("Click start to begin your game.", QFont("Times", 16, 2));
                     scene->addWidget(start_quit);
                     scene->addWidget(upgrade);
                     scene->addWidget(sell);
                     upgrade->hide();
                     sell->hide();
+                    damage->setPlainText("Damage");
+                    ShotSpee->setPlainText("Shot Speed");
+                    damshow->moveBy(700,100);
+                    Shotshow->moveBy(750,125);
+                    damage->moveBy(625,100);
+                    ShotSpee->moveBy(625,125);
+                    cost->moveBy(700,155);
+                    cost1->moveBy(700,180);
+                    cost1->hide();
+                    cost->hide();
+                    damage->hide();
+                    ShotSpee->hide();
+                    damshow->hide();
+                    Shotshow->hide();
+
 
     QGraphicsTextItem * item = scene->addText("$100", QFont("Times", 12, 10));
     QGraphicsTextItem * item2 = scene->addText("$200", QFont("Times", 12, 10));//This adds the text for the cost value of the towers.(e.v. 11/16/11)
@@ -149,6 +191,7 @@ View::View(QWidget *parent) :
     window->resize(810, 600);
     window->show();
     window->setMaximumSize(810,600);
+    window->setMinimumSize(809,599);
 }
 
 ClickableArea * View::getGameGrid()
@@ -164,6 +207,14 @@ ClickableArea * View::getTowerGrid()
 QPushButton * View::getStart_Quit()
 {
     return start_quit;
+}
+QPushButton * View::getUpgrade()
+{
+    return upgrade;
+}
+QPushButton * View::getSell()
+{
+    return sell;
 }
 
 QGraphicsView * View::getWindow()
@@ -196,6 +247,7 @@ void View::addTower(int x, int y, int grdNmbr)
     temp->towerItem->moveBy(x, y);
     towers.push_back(temp);
     //loaded = false;
+
 }
 
 bool View::isLoaded()
@@ -240,6 +292,8 @@ void View::updateStats(int hlth, int mny, int scr, int lvl)
     score->setPlainText(QString::number(scr));
 
     level->setPlainText(QString::number(lvl));
+
+
 }
 
 void View::printMonsters()
@@ -366,6 +420,36 @@ void View::drawAroundPath(int *pth, int pthSz)
         }
     }
 }
+void View::drawBox(int grdNmbr)
+{
+    QGraphicsRectItem *rect;
+    QPen GreenPen(Qt::green);
+    GreenPen.setWidth(1);
+    QGradient *gradient2 = new QLinearGradient(QPoint(0,0),QPoint(34,34));
+    gradient2->setColorAt(0,Qt::blue);
+    gradient2->setColorAt(.55,Qt::darkBlue);
+    gradient2->setColorAt(1,Qt::blue);
+    gradient2->setSpread(gradient2->ReflectSpread);
+     QGraphicsItem *r;
+    int x, y;
+
+        if (grdNmbr%17 == 0)
+        {
+            x = 566;
+        }
+        else
+        {
+            x = (((grdNmbr%17)-1)*34)+22;
+        }
+        y = (((grdNmbr-1)/17)*34)+ 10;
+{
+        rect =scene->addRect(0,0,34,34,GreenPen,QBrush(*gradient2));
+        gradient2->stops();
+        r = rect;
+        r->moveBy(x,y);
+
+    }
+}
 
 void View::drawGrid()
 {
@@ -405,16 +489,56 @@ void View::drawGrid()
     }
 
 }
-/*          // My attempt to have the top right corner actually display something
-void View::drawTopRight(int twrChc) //620,0,181,225, where it starts and how long it is
+          // My attempt to have the top right corner actually display something
+void View::drawTopRight(int spot, int dam , int shot, int cos, int cos1) //620,0,181,225, where it starts and how long it is
 {
-     QGraphicsPixmapItem * temp;
-    loadTower(twrChc);
-    temp = scene->addPixmap(*loadedImage);
-    temp->setPos(625,5);
-    temp->setScale(1.5);
+    switch(spot)
+    {
+    case 1:
+        s1->show();
+        break;
+    case 2:
+        s2->show();
+        break;
+    case 3:
+        s3->show();
+        break;
+    case 4:
+        s4->show();
+        break;
+    }
+
+    damshow->setPlainText(QString::number(dam));
+    Shotshow->setPlainText(QString::number(shot));
+    cost->setPlainText(QString::number(cos));
+    cost1->setPlainText(QString("Get " )+QString::number(cos1));
+    upgrade->show();
+    sell->show();
+    damage->show();
+    ShotSpee->show();
+    damshow->show();
+    Shotshow->show();
+    cost->show();
+    cost1->show();
 }
- */
+
+void View::hideTopRight()
+{
+    upgrade->hide();
+    sell->hide();
+    damage->hide();
+    ShotSpee->hide();
+    damshow->hide();
+    Shotshow->hide();
+    cost1->hide();
+    cost->hide();
+    s1->hide();
+    s2->hide();
+    s3->hide();
+    s4->hide();
+
+}
+
 int View::getTower_type_from_view() //(e.v. 11/16/11)This fucntion is used to return the tower type index from the view. Mainly used in the crontroller to send retrieve the index from the selected tower and send it to the addtower() function in the model. Used in the controller.cpp line 65.
 {
     return TwrType;
