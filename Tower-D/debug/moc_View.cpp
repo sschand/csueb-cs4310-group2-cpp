@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'View.h'
 **
-** Created: Thu Nov 24 18:09:42 2011
+** Created: Wed Nov 30 14:13:03 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.4)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_View[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -34,13 +34,17 @@ static const uint qt_meta_data_View[] = {
       13,    6,    5,    5, 0x0a,
       28,    5,    5,    5, 0x0a,
       43,    5,    5,    5, 0x0a,
+      59,   54,    5,    5, 0x0a,
+      93,    5,    5,    5, 0x0a,
+     108,    5,    5,    5, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_View[] = {
     "View\0\0twrChc\0loadTower(int)\0clearMessage()\0"
-    "drawGrid()\0"
+    "drawGrid()\0,,,,\0drawTopRight(int,int,int,int,int)\0"
+    "hideTopRight()\0drawBox(int)\0"
 };
 
 const QMetaObject View::staticMetaObject = {
@@ -75,9 +79,12 @@ int View::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 0: loadTower((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 1: clearMessage(); break;
         case 2: drawGrid(); break;
+        case 3: drawTopRight((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4])),(*reinterpret_cast< int(*)>(_a[5]))); break;
+        case 4: hideTopRight(); break;
+        case 5: drawBox((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
-        _id -= 3;
+        _id -= 6;
     }
     return _id;
 }
