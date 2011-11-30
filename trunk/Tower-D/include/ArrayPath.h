@@ -30,14 +30,15 @@ class ArrayPath //This object holds the array "path" monsters will be travelling
                 path = new int[pathSize];
                 int x = 0;
                 srand(time(0));
+                bool redo = false;
+                int direction = 0;
                 for (x = 0; x < 100; x++) {
                     if (x==0) {
-                        path[x] = (rand() % 12) * 17 + 1;
-                        start = path[x];
-                    }
-                    else if (x >= 1) {
-                        bool redo = false;
-                        int direction = rand() % 3;
+                        path[0] = (rand() % 12) * 17 + 1;
+                        start = path[0];
+                    } else {
+                        redo = false;
+                        direction = rand() % 3;
                         switch (direction) {
                         case 0:
                             if (path[x - 1] <= 17) redo = true;
@@ -45,25 +46,25 @@ class ArrayPath //This object holds the array "path" monsters will be travelling
                                 path[x] = path[x - 1] - 17;
                                 for (int y = 0; y < x - 1; y++) {
                                     if (path[y]==path[x]||
-                                            path[y]==path[x] - 17||
-                                            path[y]==path[x] - 1||
-                                            path[y]==path[x] + 1) redo = true;
+                                        path[y]==path[x] - 17||
+                                        path[y]==path[x] - 1||
+                                        path[y]==path[x] + 1) redo = true;
                                 }
                             }
                             break;
-                            case 1:
+                        case 1:
                             if (path[x - 1] >= 188) redo = true;
                             if (!redo) {
                                 path[x] = path[x - 1] + 17;
                                 for (int y = 0; y < x - 1; y++) {
                                     if (path[y]==path[x]||
-                                            path[y]==path[x] + 17||
-                                            path[y]==path[x] - 1||
-                                            path[y]==path[x] + 1) redo = true;
+                                        path[y]==path[x] + 17||
+                                        path[y]==path[x] - 1||
+                                        path[y]==path[x] + 1) redo = true;
                                 }
                             }
                             break;
-                            case 2:
+                        case 2:
                             if (!redo) {
                                 path[x] = path[x - 1] + 1;
                                 for (int y = 0; y < x - 1; y++) {
@@ -74,13 +75,12 @@ class ArrayPath //This object holds the array "path" monsters will be travelling
                             }
                             break;
                         }
-                        if (redo) x--;
                         if (path[x - 1] % 17 == 0) {
                             end = path[x - 1];
                             path[x] = 0;
                             pathSize = x;
                             x = 100;
-                        }
+                        } else if (redo) x--;
                     }
                 }
             }

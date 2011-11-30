@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'controller.h'
 **
-** Created: Thu Nov 24 18:22:15 2011
+** Created: Wed Nov 30 14:50:28 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.4)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_Controller[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       9,   14, // methods
+      11,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -42,6 +42,8 @@ static const uint qt_meta_data_Controller[] = {
      107,   11,   11,   11, 0x0a,
      120,   11,   11,   11, 0x0a,
      136,  132,   11,   11, 0x0a,
+     150,   11,   11,   11, 0x0a,
+     160,   11,   11,   11, 0x0a,
 
        0        // eod
 };
@@ -51,6 +53,7 @@ static const char qt_meta_stringdata_Controller[] = {
     "addMonster()\0towerChoice()\0addTower()\0"
     "incrementMonsters()\0connectQuit()\0"
     "stopClocks()\0nextLevel()\0win\0endGame(bool)\0"
+    "Upgrade()\0Sell()\0"
 };
 
 const QMetaObject Controller::staticMetaObject = {
@@ -91,9 +94,11 @@ int Controller::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 6: stopClocks(); break;
         case 7: nextLevel(); break;
         case 8: endGame((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 9: Upgrade(); break;
+        case 10: Sell(); break;
         default: ;
         }
-        _id -= 9;
+        _id -= 11;
     }
     return _id;
 }
