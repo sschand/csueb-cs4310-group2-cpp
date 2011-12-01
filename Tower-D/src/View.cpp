@@ -108,7 +108,7 @@ View::View(QWidget *parent) :
     Shotshow      = scene->addText(QString::number(0), QFont("Times", 14, 2));
     cost          = scene->addText(QString::number(0), QFont("Times", 10, 2));
     cost1         = scene->addText(QString::number(0), QFont("Times", 10, 2));
-    messageBoard  = scene->addText("Click start to begin your game.", QFont("Times", 16, 2));
+    messageBoard  = scene->addText("Click start to begin your game. Good Luck.", QFont("Times", 16, 2));
                     scene->addWidget(start_quit);
                     scene->addWidget(upgrade);
                     scene->addWidget(sell);
@@ -334,7 +334,7 @@ void View::incrementMonsters(int *pth, int pthSz)
             scene->removeItem(monsters[index]->monsterItem);
             monsters.remove(index);
             monsters.squeeze();
-            printMsg("Castle hit!");
+            printMsg("Castle Hit!");
             //QTimer::singleShot(500, this, SLOT(clearMessage()));
         }
     }
@@ -349,7 +349,7 @@ void View::kill(QVector<int> deadMonsters)
         scene->removeItem(monsters[deadMonsters[index]]->monsterItem);
         monsters.remove(deadMonsters[index]);
         monsters.squeeze();
-        printMsg("Monster killed!");
+        printMsg("Monster Killed!");
         //QTimer::singleShot(500, this, SLOT(clearMessage()));
     }
 }

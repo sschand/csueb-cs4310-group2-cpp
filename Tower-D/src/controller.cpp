@@ -185,7 +185,7 @@ void Controller::nextLevel()
 {
     model->nextLevel();
 
-    if (model->getLevel() < 16)
+    if (model->getLevel() < 17)
     {
         QObject::connect(createMonster, SIGNAL(timeout()), this, SLOT(addMonster()));
 
@@ -193,7 +193,7 @@ void Controller::nextLevel()
         waveTimer->setInterval(model->getLevel()*timeInterval*2);
         waveTimer->start();
     }
-    else if (model->getLevel() == 16)
+    else if (model->getLevel() == 17)
     {
         model->getCastle()->subtractHealth(model->getCastle()->getHealth()-1);
         addMonster();
@@ -215,7 +215,7 @@ void Controller::endGame(bool win)
         QObject::disconnect(view->getTowerGrid(), SIGNAL(clicked()), this, SLOT(towerChoice()));
         QObject::disconnect(this, SIGNAL(validTower(int)), view, SLOT(loadTower(int)));
         QObject::disconnect(gameTimer, SIGNAL(timeout()), this, SLOT(nextLevel()));
-        view->printMsg("You win!");
+        view->printMsg("You Win!");
     }
     else
     {
@@ -225,7 +225,7 @@ void Controller::endGame(bool win)
         QObject::disconnect(view->getGameGrid(), SIGNAL(clicked()), this, SLOT(addTower()));
         QObject::disconnect(view->getTowerGrid(), SIGNAL(clicked()), this, SLOT(towerChoice()));
         QObject::disconnect(this, SIGNAL(validTower(int)), view, SLOT(loadTower(int)));
-        view->printMsg("You lose!");
+        view->printMsg("You Lose!");
     }
 }
 
