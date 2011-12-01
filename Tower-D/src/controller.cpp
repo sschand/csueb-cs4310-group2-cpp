@@ -231,6 +231,7 @@ void Controller::endGame(bool win)
 
 void Controller::Sell()
 {
+    if(model->towers.size()>0){
     int spot;
 
     {
@@ -254,8 +255,9 @@ void Controller::Sell()
      model->towers.remove(spot);
     view->drawBox(grid);
     view->updateStats(model->getCastle()->getHealth(),model->getCastle()->getMoney(),model->getCastle()->getScore(), model->getLevel());
+    view->hideTopRight();
 }
-}
+}}
 }
 
 void Controller::Upgrade()
@@ -286,6 +288,8 @@ void Controller::Upgrade()
     }
     model->towers[spot]->setCost(cost);
     view->updateStats(model->getCastle()->getHealth(),model->getCastle()->getMoney(),model->getCastle()->getScore(), model->getLevel());
+    view->drawTopRight(model->towers[spot]->get_Tower_type(),model->towers[spot]->getDamage(),model->towers[spot]->getShotSpeed(),model->towers[spot]->getCost()*1.5,model->towers[spot]->getCost()*.9);
+
 }
 }
 
