@@ -299,7 +299,6 @@ void View::updateStats(int hlth, int mny, int scr, int lvl)
 void View::printMonsters()
 {
     int grdNmbr, x, y;
-
     for (int index = 0; index < monsters.size(); index++)
     {
         grdNmbr = monsters[index]->gridNumber;
@@ -318,6 +317,7 @@ void View::printMonsters()
 
 void View::incrementMonsters(int *pth, int pthSz)
 {
+    printMsg(" ");
     for (int index = 0; index < monsters.size(); index++)
     {
         for (int pathIndex = 0; pathIndex < pthSz; pathIndex++)
@@ -334,7 +334,7 @@ void View::incrementMonsters(int *pth, int pthSz)
             scene->removeItem(monsters[index]->monsterItem);
             monsters.remove(index);
             monsters.squeeze();
-            //printMsg("Castle hit!");
+            printMsg("Castle hit!");
             //QTimer::singleShot(500, this, SLOT(clearMessage()));
         }
     }
@@ -349,7 +349,7 @@ void View::kill(QVector<int> deadMonsters)
         scene->removeItem(monsters[deadMonsters[index]]->monsterItem);
         monsters.remove(deadMonsters[index]);
         monsters.squeeze();
-        //printMsg("Monster killed!");
+        printMsg("Monster killed!");
         //QTimer::singleShot(500, this, SLOT(clearMessage()));
     }
 }
